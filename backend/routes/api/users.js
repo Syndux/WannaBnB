@@ -60,8 +60,27 @@ router.post("/login", async (req, res, next) => {
 });
 
 // Signup
-router.post('', async (req, res) => {
+router.post('', async (req, res, next) => {
   const { firstName, lastName, email, username, password } = req.body;
+  
+  const existingUserEmail = await User.findOne({ where: { email } });
+  if(existingUserEmail) {
+    const err = new Error("User already exists");
+    err.status = 403;
+    err.title = "User already exists";
+    err.errors = ["User with that email already exists"];
+    return next(err);
+  };
+
+  const existingUsername = await User.findOne({ where: { username } });
+  if(existingUsername) {
+    const err = new Error("User already exists");
+    err.status = 403;
+    err.title = "User already exists";
+    err.errors = ["User with that username already exists"];
+    return next(err);
+  };
+  
   const hashedPassword = bcrypt.hashSync(password);
   const user = await User.create({
     firstName,
