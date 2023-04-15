@@ -9,18 +9,18 @@ const { User } = require("../../db/models");
 const router = express.Router();
 
 // Get current user
-router.get('/current', async (req, res) => {
+router.get("/current", async (req, res) => {
   const { user } = req;
 
-  if(user) {
+  if (user) {
     const safeUser = {
       id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      username: user.username
+      username: user.username,
     };
-    
+
     return res.json({ user: safeUser });
   } else return res.json({ user: null });
 });
@@ -55,32 +55,37 @@ router.post("/login", async (req, res, next) => {
   };
 
   safeUser.token = await setTokenCookie(res, safeUser);
-  
+
   return res.json({ user: safeUser });
 });
 
 // Signup
-router.post('', async (req, res, next) => {
+router.post("", async (req, res, next) => {
   const { firstName, lastName, email, username, password } = req.body;
-  
-  const existingUserEmail = await User.findOne({ where: { email } });
-  if(existingUserEmail) {
-    const err = new Error("User already exists");
-    err.status = 403;
-    err.title = "User already exists";
-    err.errors = ["User with that email already exists"];
-    return next(err);
-  };
 
-  const existingUsername = await User.findOne({ where: { username } });
-  if(existingUsername) {
+  const existingUser = await User.unscoped().findOne({
+    where: {
+      [Op.or]: {
+        username,
+        email,
+      },
+    },
+  });
+
+  if (existingUser) {
     const err = new Error("User already exists");
     err.status = 403;
     err.title = "User already exists";
-    err.errors = ["User with that username already exists"];
+    err.errors = [];
+    if (existingUser.email === email) {
+      err.errors.push("User with that email already exists");
+    }
+    if (existingUser.username === username) {
+      err.errors.push("User with that username already exists");
+    }
     return next(err);
-  };
-  
+  }
+
   const hashedPassword = bcrypt.hashSync(password);
   const user = await User.create({
     firstName,
