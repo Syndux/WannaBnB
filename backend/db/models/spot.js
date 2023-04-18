@@ -2,9 +2,23 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
-
     static associate(models) {
-      // define association here
+      Spot.belongsTo(models.User, {
+        foreignKey: "ownerId",
+      });
+      Spot.hasMany(models.Review, {
+        foreignKey: "spotId",
+      });
+      Spot.hasMany(models.Booking, {
+        foreignKey: "spotId",
+      });
+      Spot.hasMany(models.Image, {
+        foreignKey: "imageableId",
+        constraints: false,
+        scope: {
+          imageableType: "Spot",
+        },
+      });
     }
   }
   Spot.init(
@@ -34,16 +48,16 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           min: -90,
-          max: 90
-        }
+          max: 90,
+        },
       },
       lng: {
         type: DataTypes.DECIMAL,
         allowNull: false,
         validate: {
           min: -180,
-          max: 180
-        }
+          max: 180,
+        },
       },
       name: {
         type: DataTypes.STRING,
@@ -57,8 +71,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DECIMAL,
         allowNull: false,
         validate: {
-          min: 1
-        }
+          min: 1,
+        },
       },
     },
     {
