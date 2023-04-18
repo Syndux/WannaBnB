@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
       },
       imageableType: {
-        type: Sequelize.ENUM("SpotImage", "ReviewImage"),
+        type: Sequelize.ENUM("Spot", "Review"),
         allowNull: false,
       },
       createdAt: {
