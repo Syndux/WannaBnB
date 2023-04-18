@@ -3,7 +3,19 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Review extends Model {
     static associate(models) {
-      // define association here
+      Review.belongsTo(models.User, {
+        foreignKey: "userId",
+      });
+      Review.belongsTo(models.Spot, {
+        foreignKey: "spotId",
+      });
+      Review.hasMany(models.Image, {
+        foreignKey: "imageableId",
+        constraints: false,
+        scope: {
+          imageableType: "Review",
+        },
+      });
     }
   }
   Review.init(
@@ -15,9 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       stars: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          isInt: true,
-        }
       },
       userId: {
         type: DataTypes.INTEGER,
