@@ -19,7 +19,6 @@ module.exports = {
         },
         review: {
           type: Sequelize.TEXT,
-          allowNull: false,
         },
         stars: {
           type: Sequelize.INTEGER,
