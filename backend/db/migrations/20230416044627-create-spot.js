@@ -20,6 +20,8 @@ module.exports = {
         ownerId: {
           type: Sequelize.INTEGER,
           allowNull: false,
+          references: { model: "Users" },
+          onDelete: "CASCADE",
         },
         address: {
           type: Sequelize.STRING,
@@ -38,11 +40,11 @@ module.exports = {
           allowNull: false,
         },
         lat: {
-          type: Sequelize.DECIMAL,
+          type: Sequelize.DECIMAL(2, 7),
           allowNull: false,
         },
         lng: {
-          type: Sequelize.DECIMAL,
+          type: Sequelize.DECIMAL(2, 7),
           allowNull: false,
         },
         name: {
