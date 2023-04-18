@@ -17,7 +17,7 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER,
         },
-        content: {
+        review: {
           type: Sequelize.TEXT,
           allowNull: false,
         },
