@@ -15,7 +15,7 @@ router.get("", async (req, res) => {
     include: [
       {
         model: Review,
-        attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],],
+        attributes: [],
       },
       {
         model: Image,
@@ -26,9 +26,10 @@ router.get("", async (req, res) => {
     raw: true,
     attributes: {
       include: [
-        ['Images.url', 'previewImage']
-      ]
-    }
+        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
+        [sequelize.col("Images.url"), "previewImage"],
+      ],
+    },
   });
 
   res.json(spots);
