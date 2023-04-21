@@ -74,8 +74,6 @@ router.get("/:id", async (req, res, next) => {
     group: ["Spot.id"],
   });
 
-
-
   if(spot) {
     res.json(spot);
   } else {
