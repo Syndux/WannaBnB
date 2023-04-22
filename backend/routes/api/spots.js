@@ -21,9 +21,41 @@ const {
 
 const router = express.Router();
 
+const validateSpotCreation = [
+  check("address")
+    .exists({ checkFalsy: true })
+    .withMessage("Street addres is required"),
+  check("city")
+    .exists({ checkFalsy: true })
+    .withMessage("City is required"),
+  check("state")
+    .exists({ checkFalsy: true })
+    .withMessage("State is required"),
+  check("country")
+    .exists({ checkFalsy: true })
+    .withMessage("Country is required"),
+  check("lat")
+    .exists({ checkFalsy: true })
+    .withMessage("Latitude is not valid"),
+  check("lng")
+    .exists({ checkFalsy: true })
+    .withMessage("Longitude is not valid"),
+  check("name")
+    .exists({ checkFalsy: true })
+    .isLength({ max: 50 })
+    .withMessage("Name must be less than 50 characters"),
+  check("description")
+    .exists({ checkFalsy: true })
+    .withMessage("Description is required"),
+  check("price")
+    .exists({ checkFalsy: true })
+    .withMessage("Price per day is required"),
+  handleValidationErrors,
+];
+
 router.get("/owned", requireAuth, async (req, res) => {
   const ownedSpots = await Spot.findAll({
-    where: { id: req.user.id },
+    where: { ownerId: req.user.id },
     include: [
       {
         model: Review,
@@ -40,6 +72,7 @@ router.get("/owned", requireAuth, async (req, res) => {
         [sequelize.col("Images.url"), "previewImage"],
       ],
     },
+    group: ["Spot.id"],
   });
 
   res.json({ Spots: ownedSpots });
@@ -56,25 +89,25 @@ router.get("/:id", async (req, res, next) => {
       },
       {
         model: Image,
-        attributes: ['id', 'url', 'preview'],
-        as: 'SpotImages'
+        attributes: ["id", "url", "preview"],
+        as: "SpotImages",
       },
       {
         model: User,
-        attributes: ['id', 'firstName', 'lastName'],
-        as: 'Owner'
-      }
+        attributes: ["id", "firstName", "lastName"],
+        as: "Owner",
+      },
     ],
     attributes: {
       include: [
         [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
         [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgStarRating"],
-      ]
+      ],
     },
     group: ["Spot.id"],
   });
 
-  if(spot) {
+  if (spot) {
     res.json(spot);
   } else {
     next({
@@ -82,7 +115,6 @@ router.get("/:id", async (req, res, next) => {
       message: "Spot couldn't be found",
     });
   }
-
 });
 
 router.get("", async (req, res) => {
@@ -109,20 +141,38 @@ router.get("", async (req, res) => {
   res.json({ Spots: spots });
 });
 
-router.post("", requireAuth, async (req, res) => {
-  try{
-    const { address, city, state, country, lat, lng, name, description, price} = req.body;
-  
+router.post("", requireAuth, validateSpotCreation, async (req, res, next) => {
+  try {
+    const {
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    } = req.body;
+
+    const { id } = req.user;
     const newSpot = await Spot.create({
-      address, city, state, country, lat, lng, name, description, price
+      ownerId: id,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
     });
 
     res.json(newSpot);
   } catch (err) {
-    
+    return next(err);
   }
-
-
 });
 
 module.exports = router;
