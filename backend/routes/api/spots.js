@@ -162,6 +162,35 @@ router.put("/:id", requireAuth, validateSpotBody, async (req, res, next) => {
   return res.json(updatedSpot);
 });
 
+router.delete("/:id", requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const spotId = req.params.id;
+
+  const spot = await Spot.findByPk(spotId);
+  
+  if (!spot) {
+    return next({
+      status: 404,
+      message: "Spot couldn't be found",
+    });
+  }
+
+  if (user.id !== spot.ownerId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.title = "Authorization required";
+    err.errors = ["User does not have the correct permissions"];
+    return next(err);
+  }
+
+  await spot.destroy();
+
+  return res.json({
+    message: "Successfully deleted",
+    statusCode: 200
+  });
+});
+
 router.get("", async (req, res) => {
   const spots = await Spot.findAll({
     include: [
