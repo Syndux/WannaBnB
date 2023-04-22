@@ -10,7 +10,7 @@ const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/mode
 
 const router = express.Router();
 
-const validateSpotCreation = [
+const validateSpotBody = [
   check("address")
     .exists({ checkFalsy: true })
     .withMessage("Street addres is required"),
@@ -54,7 +54,7 @@ router.get("/owned", requireAuth, async (req, res) => {
     group: ["Spot.id"],
   });
 
-  res.json({ Spots: ownedSpots });
+  return res.json({ Spots: ownedSpots });
 });
 
 router.post("/:spotId/images", requireAuth, async (req, res, next) => {
@@ -64,8 +64,8 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
 
   const spot = await Spot.findByPk(spotId);
 
-  if(!spot) {
-    next({
+  if (!spot) {
+    return next({
       status: 404,
       message: "Spot couldn't be found",
     });
@@ -86,7 +86,7 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
     imageableType: "Spot",
   });
 
-  res.json({
+  return res.json({
     id: newSpotImage.id,
     url: newSpotImage.url,
     preview: newSpotImage.preview,
@@ -123,13 +123,43 @@ router.get("/:id", async (req, res, next) => {
   });
 
   if (spot) {
-    res.json(spot);
+    return res.json(spot);
   } else {
-    next({
+    return next({
       status: 404,
       message: "Spot couldn't be found",
     });
   }
+});
+
+router.put("/:id", requireAuth, validateSpotBody, async (req, res, next) => {
+  const { user } = req;
+  const spotId = req.params.id;
+  const { address, city, state, country, lat, lng, name, description, price } =
+    req.body;
+
+  const spot = await Spot.findByPk(spotId);
+  
+  if (!spot) {
+    return next({
+      status: 404,
+      message: "Spot couldn't be found",
+    });
+  }
+
+  if (user.id !== spot.ownerId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.title = "Authorization required";
+    err.errors = ["User does not have the correct permissions"];
+    return next(err);
+  }
+
+  const updatedSpot = await spot.update({
+    address, city, state, country, lat, lng, name, description, price
+  });
+
+  return res.json(updatedSpot);
 });
 
 router.get("", async (req, res) => {
@@ -153,10 +183,10 @@ router.get("", async (req, res) => {
     },
   });
 
-  res.json({ Spots: spots });
+  return res.json({ Spots: spots });
 });
 
-router.post("", requireAuth, validateSpotCreation, async (req, res, next) => {
+router.post("", requireAuth, validateSpotBody, async (req, res, next) => {
   try {
     const { address, city, state, country, lat, lng, name, description, price } =
       req.body;
@@ -175,7 +205,7 @@ router.post("", requireAuth, validateSpotCreation, async (req, res, next) => {
       price,
     });
 
-    res.json(newSpot);
+    return res.json(newSpot);
   } catch (err) {
     return next(err);
   }
