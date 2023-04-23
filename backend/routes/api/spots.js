@@ -1,8 +1,5 @@
 // backend/routes/api/spots.js
 const express = require("express");
-const { Op } = require("sequelize");
-const bcrypt = require("bcryptjs");
-const { check } = require("express-validator");
 
 const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
 const { validateSpotBody } = require("../../utils/validation");
