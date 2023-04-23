@@ -172,7 +172,7 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
 });
 
 // Get all spots
-router.get("", async (req, res) => {
+router.get("", async (_req, res) => {
   const spots = await Spot.findAll({
     include: [
       {
