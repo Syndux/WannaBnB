@@ -2,42 +2,12 @@
 const express = require("express");
 const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
-const { check } = require("express-validator");
 
-const { setTokenCookie, restoreUser } = require("../../utils/auth");
-const { handleValidationErrors } = require("../../utils/validation");
+const { setTokenCookie } = require("../../utils/auth");
+const { validateLogin, validateSignup } = require("../../utils/validation");
 const { User } = require("../../db/models");
 
 const router = express.Router();
-
-const validateLogin = [
-  check("credential")
-    .exists({ checkFalsy: true })
-    .withMessage("Email or username is required"),
-  check("password")
-    .exists({ checkFalsy: true })
-    .withMessage("Password is required"),
-  handleValidationErrors,
-];
-
-const validateSignup = [
-  check("email")
-    .exists({ checkFalsy: true })
-    .withMessage("Email is required"),
-  check("email")
-    .isEmail()
-    .withMessage("Invalid email"),
-  check("username")
-    .exists({ checkFalsy: true })
-    .withMessage("Username is required"),
-  check("firstName")
-    .exists({ checkFalsy: true })
-    .withMessage("First Name is required"),
-  check("lastName")
-    .exists({ checkFalsy: true })
-    .withMessage("Last Name is required"),
-  handleValidationErrors,
-];
 
 // Get current user
 router.get("/current", async (req, res) => {
@@ -72,8 +42,7 @@ router.post("/login", validateLogin, async (req, res, next) => {
   if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
     const err = new Error("Invalid credentials");
     err.status = 401;
-    err.title = "Invalid credentials";
-    err.errors = { credential: "Invalid credentials" };
+    err.message = "Invalid credentials";
     return next(err);
   }
 

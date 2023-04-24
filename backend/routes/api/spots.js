@@ -1,37 +1,13 @@
 // backend/routes/api/spots.js
 const express = require("express");
-const { Op } = require("sequelize");
-const bcrypt = require("bcryptjs");
-const { check } = require("express-validator");
 
 const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
-const { handleValidationErrors } = require("../../utils/validation");
+const { validateSpotBody } = require("../../utils/validation");
 const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/models");
 
 const router = express.Router();
 
-const validateSpotBody = [
-  check("address")
-    .exists({ checkFalsy: true })
-    .withMessage("Street addres is required"),
-  check("city").exists({ checkFalsy: true }).withMessage("City is required"),
-  check("state").exists({ checkFalsy: true }).withMessage("State is required"),
-  check("country").exists({ checkFalsy: true }).withMessage("Country is required"),
-  check("lat").exists({ checkFalsy: true }).withMessage("Latitude is not valid"),
-  check("lng").exists({ checkFalsy: true }).withMessage("Longitude is not valid"),
-  check("name")
-    .exists({ checkFalsy: true })
-    .isLength({ max: 50 })
-    .withMessage("Name must be less than 50 characters"),
-  check("description")
-    .exists({ checkFalsy: true })
-    .withMessage("Description is required"),
-  check("price")
-    .exists({ checkFalsy: true })
-    .withMessage("Price per day is required"),
-  handleValidationErrors,
-];
-
+// Get spots of current user
 router.get("/owned", requireAuth, async (req, res) => {
   const ownedSpots = await Spot.findAll({
     where: { ownerId: req.user.id },
@@ -57,6 +33,7 @@ router.get("/owned", requireAuth, async (req, res) => {
   return res.json({ Spots: ownedSpots });
 });
 
+// Add Image to a spot
 router.post("/:spotId/images", requireAuth, async (req, res, next) => {
   const { user } = req;
   const { spotId } = req.params;
@@ -93,6 +70,7 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
   });
 });
 
+// Get spot by id
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
 
@@ -132,6 +110,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+// Edit spot by id
 router.put("/:id", requireAuth, validateSpotBody, async (req, res, next) => {
   const { user } = req;
   const spotId = req.params.id;
@@ -162,6 +141,7 @@ router.put("/:id", requireAuth, validateSpotBody, async (req, res, next) => {
   return res.json(updatedSpot);
 });
 
+// Delete spot by id
 router.delete("/:id", requireAuth, async (req, res, next) => {
   const { user } = req;
   const spotId = req.params.id;
@@ -191,7 +171,8 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
   });
 });
 
-router.get("", async (req, res) => {
+// Get all spots
+router.get("", async (_req, res) => {
   const spots = await Spot.findAll({
     include: [
       {
@@ -215,6 +196,7 @@ router.get("", async (req, res) => {
   return res.json({ Spots: spots });
 });
 
+// Add new spot
 router.post("", requireAuth, validateSpotBody, async (req, res, next) => {
   try {
     const { address, city, state, country, lat, lng, name, description, price } =
