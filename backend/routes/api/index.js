@@ -12,7 +12,7 @@ router.use(restoreUser);
 
 router.use("/users", usersRouter);
 router.use("/spots", spotsRouter);
-router.use("/reveiws", reviewsRouter);
+router.use("/reviews", reviewsRouter);
 
 router.post("/test", (req, res) => {
   res.json({ requestBody: req.body });

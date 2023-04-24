@@ -9,4 +9,30 @@ const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/mode
 
 const router = express.Router();
 
+router.get("/current", requireAuth, async (req, res, next) => {
+  const userReviews = await Review.findAll({
+    where: { userId: req.user.id },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
+      {
+        model: Spot,
+        attributes: {
+          exclude: ["description", "createdAt", "updatedAt"]
+        }
+      },
+      {
+        model: Image,
+        attributes: ["id", "url"],
+        as: "ReviewImages",
+      },
+    ],
+  });
+
+  return res.json({ Reviews: userReviews });
+});
+
+
 module.exports = router;

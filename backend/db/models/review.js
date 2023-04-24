@@ -15,6 +15,14 @@ module.exports = (sequelize, DataTypes) => {
         scope: {
           imageableType: "Review",
         },
+        as: "ReviewImages"
+      });
+      Review.hasMany(models.Image, {
+        foreignKey: "imageableId",
+        constraints: false,
+        scope: {
+          imageableType: "Review",
+        },
       });
     }
   }
