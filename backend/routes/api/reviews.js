@@ -20,8 +20,8 @@ router.get("/current", requireAuth, async (req, res, next) => {
       {
         model: Spot,
         attributes: {
-          exclude: ["description", "createdAt", "updatedAt"]
-        }
+          exclude: ["description", "createdAt", "updatedAt"],
+        },
       },
       {
         model: Image,
@@ -31,8 +31,18 @@ router.get("/current", requireAuth, async (req, res, next) => {
     ],
   });
 
+  for (const review of userReviews) {
+    const spotPreviewImage = await Image.findOne({
+      where: { imageableId: review.Spot.id, imageableType: "Spot", preview: true },
+      attributes: ["url"],
+    });
+
+    spotPreviewImage
+      ? (review.Spot.dataValues.previewImage = spotPreviewImage.url)
+      : (review.Spot.dataValues.previewImage = null);
+  }
+
   return res.json({ Reviews: userReviews });
 });
-
 
 module.exports = router;
