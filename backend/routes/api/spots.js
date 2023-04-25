@@ -52,8 +52,7 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
   if (user.id !== spot.ownerId) {
     const err = new Error("Authorization required");
     err.status = 403;
-    err.title = "Authorization required";
-    err.errors = ["User does not have the correct permissions"];
+    err.message = "Forbidden";
     return next(err);
   }
 
@@ -130,8 +129,7 @@ router.put("/:id", requireAuth, validateSpotBody, async (req, res, next) => {
   if (user.id !== spot.ownerId) {
     const err = new Error("Authorization required");
     err.status = 403;
-    err.title = "Authorization required";
-    err.errors = ["User does not have the correct permissions"];
+    err.message = "Forbidden";
     return next(err);
   }
 
@@ -159,8 +157,7 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
   if (user.id !== spot.ownerId) {
     const err = new Error("Authorization required");
     err.status = 403;
-    err.title = "Authorization required";
-    err.errors = ["User does not have the correct permissions"];
+    err.message = "Forbidden";
     return next(err);
   }
 
