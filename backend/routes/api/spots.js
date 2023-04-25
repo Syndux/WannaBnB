@@ -70,6 +70,26 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
   });
 });
 
+// Get reviews by spot id
+router.get("/:id/reviews", async (req, res, next) => {
+  const reviews = await Review.findAll({
+    where: { spotId: req.params.id },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
+      {
+        model: Image,
+        as: "ReviewImages",
+        attributes: ["id", "url"],
+      }
+    ]
+  });
+
+  res.json({ Reviews: reviews });
+});
+
 // Get spot by id
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
