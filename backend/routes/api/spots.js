@@ -296,7 +296,7 @@ router.post("", requireAuth, validateSpotBody, async (req, res, next) => {
       price,
     });
 
-    return res.json(newSpot);
+    return res.status(201).json(newSpot);
   } catch (err) {
     return next(err);
   }
