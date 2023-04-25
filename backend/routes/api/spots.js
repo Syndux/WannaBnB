@@ -28,12 +28,11 @@ router.get("/owned", requireAuth, async (req, res) => {
         [sequelize.col("Images.url"), "previewImage"],
       ],
     },
-    group: ["Images.id"],
+    group: ["Spot.id"],
   });
 
   return res.json({ Spots: ownedSpots });
 });
-
 
 // Add Image to a spot
 router.post("/:spotId/images", requireAuth, async (req, res, next) => {
@@ -184,6 +183,7 @@ router.get("", async (_req, res) => {
       {
         model: Image,
         attributes: [],
+        where: { preview: true },
       },
     ],
     group: ["Spot.id"],
