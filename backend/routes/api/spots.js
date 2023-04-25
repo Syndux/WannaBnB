@@ -140,7 +140,7 @@ router.post("/:id/reviews", requireAuth, validateReviewBody, async (req, res, ne
     stars,
   });
 
-  return res.json(newReview);
+  return res.status(201).json(newReview);
 });
 
 // Get spot by id
