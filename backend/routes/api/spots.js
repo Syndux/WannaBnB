@@ -74,6 +74,25 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
 
+  const images = await Image.findAll({
+      where: { imageableId: 1, imageableType: "Spot" },
+      attributes: ["id", "url", "preview"],
+  });
+
+  console.log(images);
+
+  // const spotImages = await Spot.findByPk(id, {
+  //   include: [
+  //     {
+  //       model: Image,
+  //       attributes: ["id", "url", "preview"],
+  //       as: "SpotImages",
+  //     },
+  //   ]
+  // });
+
+  // console.log(spotImages);
+
   const spot = await Spot.findByPk(id, {
     include: [
       {
@@ -97,7 +116,7 @@ router.get("/:id", async (req, res, next) => {
         [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgStarRating"],
       ],
     },
-    group: ["Spot.id"],
+    group: ["SpotImages.id"]
   });
 
   if (spot) {
