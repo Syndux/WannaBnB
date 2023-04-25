@@ -72,8 +72,10 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
 
 // Get reviews by spot id
 router.get("/:id/reviews", async (req, res, next) => {
+  const { id } = req.params;
+
   const reviews = await Review.findAll({
-    where: { spotId: req.params.id },
+    where: { spotId: id },
     include: [
       {
         model: User,
@@ -83,11 +85,18 @@ router.get("/:id/reviews", async (req, res, next) => {
         model: Image,
         as: "ReviewImages",
         attributes: ["id", "url"],
-      }
-    ]
+      },
+    ],
   });
 
-  res.json({ Reviews: reviews });
+  if(reviews.length) {
+    return res.json({ Reviews: reviews })
+  } else {
+    return next({
+      message: "Spot couldn't be found",
+      status: 404,
+    });
+  }
 });
 
 // Get spot by id
@@ -117,7 +126,7 @@ router.get("/:id", async (req, res, next) => {
         [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgStarRating"],
       ],
     },
-    group: ["SpotImages.id"]
+    group: ["SpotImages.id"],
   });
 
   if (spot) {
@@ -138,7 +147,7 @@ router.put("/:id", requireAuth, validateSpotBody, async (req, res, next) => {
     req.body;
 
   const spot = await Spot.findByPk(spotId);
-  
+
   if (!spot) {
     return next({
       status: 404,
@@ -154,7 +163,15 @@ router.put("/:id", requireAuth, validateSpotBody, async (req, res, next) => {
   }
 
   const updatedSpot = await spot.update({
-    address, city, state, country, lat, lng, name, description, price
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
   });
 
   return res.json(updatedSpot);
@@ -166,7 +183,7 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
   const spotId = req.params.id;
 
   const spot = await Spot.findByPk(spotId);
-  
+
   if (!spot) {
     return next({
       status: 404,
@@ -185,7 +202,7 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
 
   return res.json({
     message: "Successfully deleted",
-    statusCode: 200
+    statusCode: 200,
   });
 });
 
