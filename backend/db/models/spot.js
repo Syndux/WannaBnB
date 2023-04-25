@@ -21,6 +21,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         as: "SpotImages",
       });
+      Spot.hasMany(models.Image, {
+        foreignKey: "imageableId",
+        constraints: false,
+        scope: {
+          imageableType: "Spot",
+        },
+      });
     }
   }
   Spot.init(
