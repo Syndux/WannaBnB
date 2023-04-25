@@ -19,7 +19,7 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://imgur.com/a/spotImg1Prev",
+          url: "https://imgur.com/spotImg1Prev",
           preview: true,
           imageableId: 1,
           imageableType: "Spot",
@@ -55,7 +55,7 @@ module.exports = {
           imageableType: "Review",
         },
         {
-          url: "https://imgur.com/a/revImg1Prev",
+          url: "https://imgur.com/revImg1Prev",
           preview: true,
           imageableId: 1,
           imageableType: "Review",
@@ -73,7 +73,7 @@ module.exports = {
           imageableType: "Review",
         },
         {
-          url: "https://imgur.com/revvImg3noPrev",
+          url: "https://imgur.com/revImg3noPrev",
           preview: false,
           imageableId: 3,
           imageableType: "Review",
