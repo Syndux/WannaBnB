@@ -84,6 +84,14 @@ const validateSpotBody = [
   handleValidationErrors,
 ];
 
+const validateReviewBody = [
+  check("review", "Review text is required")
+    .exists({ checkFalsy: true }),
+  check("stars", "Stars must be an integer from 1 to 5")
+    .isInt({ min: 1, max: 5 }),
+  handleValidationErrors,
+]
+
 module.exports = {
-  handleValidationErrors, validateLogin, validateSignup, validateSpotBody
+  validateLogin, validateSignup, validateSpotBody, validateReviewBody
 };

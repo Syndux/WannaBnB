@@ -2,7 +2,7 @@
 const express = require("express");
 
 const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
-const { validateSpotBody } = require("../../utils/validation");
+const { validateSpotBody, validateReviewBody } = require("../../utils/validation");
 const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/models");
 
 const router = express.Router();
@@ -89,14 +89,58 @@ router.get("/:id/reviews", async (req, res, next) => {
     ],
   });
 
-  if(reviews.length) {
-    return res.json({ Reviews: reviews })
+  if (reviews.length) {
+    return res.json({ Reviews: reviews });
   } else {
     return next({
       message: "Spot couldn't be found",
       status: 404,
     });
   }
+});
+
+// Create review for spot from id
+router.post("/:id/reviews", validateReviewBody, async (req, res, next) => {
+  const { review, stars } = req.body;
+  const spotId = +req.params.id;
+  const userId = req.user.id;
+
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    return next({
+      status: 404,
+      message: "Spot couldn't be found",
+    });
+  }
+
+  // user is owner of spot
+  // if(spot.ownerId = userId) {
+  //   return next({
+  //     status: 404,
+  //     message: "Owner can not write review for spot"
+  //   })
+  // }
+
+  const oldReview = await Review.findAll({
+    where: { userId, spotId },
+  });
+
+  if (oldReview.length) {
+    return next({
+      status: 403,
+      message: "User already has a review for this spot",
+    });
+  }
+
+  const newReview = await Review.create({
+    userId,
+    spotId,
+    review,
+    stars,
+  });
+
+  return res.json(newReview);
 });
 
 // Get spot by id
