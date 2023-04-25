@@ -13,21 +13,15 @@ module.exports = {
       options,
       [
         {
-          url: "https://imgur.com/a/spotImg1Prev",
-          preview: true,
-          imageableId: 1,
-          imageableType: "Spot",
-        },
-        {
           url: "https://imgur.com/spotImg1noPrev",
           preview: false,
           imageableId: 1,
           imageableType: "Spot",
         },
         {
-          url: "https://imgur.com/spotImg2Prev",
+          url: "https://imgur.com/a/spotImg1Prev",
           preview: true,
-          imageableId: 2,
+          imageableId: 1,
           imageableType: "Spot",
         },
         {
@@ -37,9 +31,9 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://imgur.com/spotImg3Prev",
+          url: "https://imgur.com/spotImg2Prev",
           preview: true,
-          imageableId: 3,
+          imageableId: 2,
           imageableType: "Spot",
         },
         {
@@ -49,10 +43,10 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://imgur.com/a/revImg1Prev",
+          url: "https://imgur.com/spotImg3Prev",
           preview: true,
-          imageableId: 1,
-          imageableType: "Review",
+          imageableId: 3,
+          imageableType: "Spot",
         },
         {
           url: "https://imgur.com/revImg1noPrev",
@@ -61,9 +55,9 @@ module.exports = {
           imageableType: "Review",
         },
         {
-          url: "https://imgur.com/revImg2Prev",
+          url: "https://imgur.com/a/revImg1Prev",
           preview: true,
-          imageableId: 2,
+          imageableId: 1,
           imageableType: "Review",
         },
         {
@@ -73,14 +67,20 @@ module.exports = {
           imageableType: "Review",
         },
         {
-          url: "https://imgur.com/revImg3Prev",
+          url: "https://imgur.com/revImg2Prev",
           preview: true,
-          imageableId: 3,
+          imageableId: 2,
           imageableType: "Review",
         },
         {
           url: "https://imgur.com/revvImg3noPrev",
           preview: false,
+          imageableId: 3,
+          imageableType: "Review",
+        },
+        {
+          url: "https://imgur.com/revImg3Prev",
+          preview: true,
           imageableId: 3,
           imageableType: "Review",
         },
