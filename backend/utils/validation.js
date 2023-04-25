@@ -53,7 +53,7 @@ const validateSignup = [
 const validateSpotBody = [
   check("address")
     .exists({ checkFalsy: true })
-    .withMessage("Street addres is required"),
+    .withMessage("Street address is required"),
   check("city")
     .exists({ checkFalsy: true })
     .withMessage("City is required"),
