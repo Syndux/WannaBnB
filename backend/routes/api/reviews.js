@@ -42,9 +42,9 @@ router.get("/current", requireAuth, async (req, res, next) => {
       attributes: ["url"],
     });
 
-    spotPreviewImage
-      ? (review.Spot.dataValues.previewImage = spotPreviewImage.url)
-      : (review.Spot.dataValues.previewImage = null);
+    review.Spot.dataValues.previewImage = spotPreviewImage
+      ? spotPreviewImage.url
+      : null;
   }
 
   return res.json({ Reviews: userReviews });
