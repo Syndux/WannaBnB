@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const { check } = require("express-validator");
 
 const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
-const { handleValidationErrors } = require("../../utils/validation");
+const { validateReviewBody } = require("../../utils/validation");
 const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/models");
 
 const router = express.Router();
@@ -80,12 +80,12 @@ router.post("/:id/images", requireAuth, async (req, res, next) => {
     attributes: [[sequelize.fn("COUNT", sequelize.col("id")), "imageCount"]],
   });
 
-  if(imageData[0].dataValues.imageCount >= 10) {
+  if (imageData[0].dataValues.imageCount >= 10) {
     return next({
       status: 403,
-      message: "Maximum number of images for this resource was reached"
+      message: "Maximum number of images for this resource was reached",
     });
-  };
+  }
 
   const newImage = await Image.create({
     url,
@@ -95,6 +95,36 @@ router.post("/:id/images", requireAuth, async (req, res, next) => {
   });
 
   return res.json({ id: newImage.id, url });
+});
+
+// Edit a review
+router.put("/:id", requireAuth, validateReviewBody, async (req, res, next) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+  const { review, stars } = req.body;
+
+  const oldReview = await Review.findByPk(id);
+
+  if (!oldReview) {
+    return next({
+      status: 404,
+      message: "Review couldn't be found",
+    });
+  }
+
+  if (userId !== oldReview.userId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "Forbidden";
+    return next(err);
+  }
+
+  const updatedReview = await oldReview.update({
+    review,
+    stars,
+  });
+
+  return res.json(updatedReview);
 });
 
 module.exports = router;
