@@ -143,6 +143,40 @@ router.post("/:id/reviews", requireAuth, validateReviewBody, async (req, res, ne
   return res.status(201).json(newReview);
 });
 
+// Get bookings by spot id
+router.get("/:id/bookings", requireAuth, async (req, res, next) => {
+  const spotId = req.params.id;
+  const userId = req.user.id;
+  const attributes = [];
+
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    return next({
+      status: 404,
+      message: "Spot couldn't be found",
+    });
+  }
+
+  if(spot.ownerId !== userId) {
+    attributes.exclude = ["id", "userId", "spotId", "createdAt", "updatedAt"]
+  } else {
+    attributes.include = {
+      model: User,
+      attributes: ["id", "firstName", "lastName"]
+    };
+  }
+
+  console.log(attributes);
+  
+  const bookings = await Booking.findAll({
+    where: { spotId },
+    attributes
+  });
+
+  return res.json({ Bookings: bookings });
+})
+
 // Get spot by id
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
