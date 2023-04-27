@@ -9,6 +9,7 @@ const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/mode
 
 const router = express.Router();
 
+// Get current user's bookings
 router.get("/current", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
 
