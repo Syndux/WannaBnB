@@ -138,4 +138,11 @@ router.put("/:id", requireAuth, validateBookingBody, async (req, res, next) => {
   return res.json(booking);
 });
 
+// Delete a booking
+router.delete("/:id", requireAuth, async (req, res, next) => {
+  const bookingId = +req.params.id;
+  const userId = +req.user.id;
+
+  
+});
 module.exports = router;
