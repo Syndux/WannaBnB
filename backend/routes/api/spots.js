@@ -3,7 +3,7 @@ const express = require("express");
 const { Op } = require("sequelize");
 
 const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
-const { validateSpotBody, validateReviewBody } = require("../../utils/validation");
+const { validateSpotBody, validateReviewBody, validateBookingBody } = require("../../utils/validation");
 const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/models");
 
 const router = express.Router();
@@ -186,7 +186,7 @@ router.get("/:id/bookings", requireAuth, async (req, res, next) => {
 });
 
 // Create booking from spotId
-router.post("/:id/bookings", requireAuth, async (req, res, next) => {
+router.post("/:id/bookings", requireAuth, validateBookingBody, async (req, res, next) => {
   const { startDate, endDate } = req.body;
   const spotId = +req.params.id;
   const userId = req.user.id;

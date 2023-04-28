@@ -92,6 +92,19 @@ const validateReviewBody = [
   handleValidationErrors,
 ]
 
+const validateBookingBody = [
+  check("endDate", "endDate cannot be on or before startDate")
+    .custom((value, { req }) => {
+      const startDate = new Date(req.body.startDate);
+      const endDate = new Date(req.body.endDate);
+      if(startDate >= endDate) {
+        throw new Error("endDate cannot be on or before startDate")
+      }
+      return true;
+    }),
+  handleValidationErrors,
+]
+
 module.exports = {
-  validateLogin, validateSignup, validateSpotBody, validateReviewBody
+  validateLogin, validateSignup, validateSpotBody, validateReviewBody, validateBookingBody
 };
