@@ -151,7 +151,7 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
     },
   });
 
-  if(!booking) {
+  if (!booking) {
     return next({
       status: 404,
       message: "Booking couldn't be found",
@@ -169,7 +169,7 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
   const endDate = booking.endDate;
   const nowDate = new Date();
 
-  if(nowDate > startDate && nowDate < endDate) {
+  if (nowDate > startDate && nowDate < endDate) {
     return next({
       status: 403,
       message: "Bookings that have been started can't be deleted",
@@ -180,8 +180,7 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
 
   return res.json({
     status: 200,
-    message: "Successfully deleted"
+    message: "Successfully deleted",
   });
-
 });
 module.exports = router;
