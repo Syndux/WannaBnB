@@ -4,8 +4,9 @@ const bcrypt = require("bcryptjs");
 const { check } = require("express-validator");
 
 const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
-const { validateReviewBody } = require("../../utils/validation");
+const { validateBookingBody } = require("../../utils/validation");
 const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/models");
+const { route } = require("./reviews");
 
 const router = express.Router();
 
@@ -32,8 +33,14 @@ router.get("/current", requireAuth, async (req, res, next) => {
     booking.dataValues.startDate = booking.startDate.toISOString().substring(0, 10);
     booking.dataValues.endDate = booking.endDate.toISOString().substring(0, 10);
 
-    booking.dataValues.createdAt = booking.createdAt.toISOString().replace("T", " ").substring(0, 19);
-    booking.dataValues.updatedAt = booking.updatedAt.toISOString().replace("T", " ").substring(0, 19);
+    booking.dataValues.createdAt = booking.createdAt
+      .toISOString()
+      .replace("T", " ")
+      .substring(0, 19);
+    booking.dataValues.updatedAt = booking.updatedAt
+      .toISOString()
+      .replace("T", " ")
+      .substring(0, 19);
 
     const spotPreviewImage = await Image.findOne({
       where: { imageableId: booking.Spot.id, imageableType: "Spot", preview: true },
@@ -46,6 +53,89 @@ router.get("/current", requireAuth, async (req, res, next) => {
   }
 
   return res.json({ Bookings: bookings });
+});
+
+// Edit a booking
+router.put("/:id", requireAuth, validateBookingBody, async (req, res, next) => {
+  const bookingId = +req.params.id;
+  const userId = +req.user.id;
+  const { startDate, endDate } = req.body;
+
+  const booking = await Booking.findByPk(bookingId);
+
+  if (!booking) {
+    return next({
+      status: 404,
+      message: "Booking couldn't be found",
+    });
+  };
+
+  if(booking.endDate <= new Date()) {
+    return next({
+      status: 403,
+      message: "Past bookings can't be modified",
+    });
+  };
+
+  const conflictBookings = await Booking.findAll({
+    where: {
+      spotId,
+      [Op.or]: [
+        {
+          startDate: {
+            [Op.between]: [
+              `${new Date(startDate).toISOString()}`,
+              `${new Date(endDate).toISOString()}`,
+            ],
+          },
+        },
+        {
+          endDate: {
+            [Op.between]: [
+              `${new Date(startDate).toISOString()}`,
+              `${new Date(endDate).toISOString()}`,
+            ],
+          },
+        },
+        {
+          startDate: { [Op.lte]: startDate },
+          endDate: { [Op.gte]: endDate },
+        },
+      ],
+    },
+  });
+
+  if (conflictBookings.length > 0) {
+    const errors = [];
+
+    const booking = conflictBookings[0];
+
+    const bookingStart = booking.startDate.toISOString().substring(0, 10);
+    const bookingEnd = booking.endDate.toISOString().substring(0, 10);
+
+    if (startDate >= bookingStart && startDate <= bookingEnd) {
+      errors.push("Start date conflicts with an existing booking");
+    }
+    if (endDate >= bookingStart && endDate <= bookingEnd) {
+      errors.push("End date conflicts with an existing booking");
+    }
+    if (startDate < bookingStart && endDate > bookingEnd) {
+      errors.push("Booking conflicts with an existing booking");
+    }
+
+    return next({
+      status: 403,
+      message: "Sorry, this spot is already booked for the specified dates",
+      errors,
+    });
+  }
+
+  await booking.update({
+    startDate, endDate,
+  });
+
+  return res.json(booking);
+
 });
 
 module.exports = router;
