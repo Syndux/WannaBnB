@@ -267,7 +267,7 @@ router.post("/:id/bookings", requireAuth, validateBookingBody, async (req, res, 
     endDate,
   });
 
-  return res.json({ newBooking });
+  return res.json(newBooking);
 });
 
 // Get spot by id

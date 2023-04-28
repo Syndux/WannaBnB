@@ -79,7 +79,8 @@ router.put("/:id", requireAuth, validateBookingBody, async (req, res, next) => {
 
   const conflictBookings = await Booking.findAll({
     where: {
-      spotId,
+      spotId: booking.spotId,
+      userId: { [Op.not]: userId },
       [Op.or]: [
         {
           startDate: {
@@ -135,7 +136,6 @@ router.put("/:id", requireAuth, validateBookingBody, async (req, res, next) => {
   });
 
   return res.json(booking);
-
 });
 
 module.exports = router;
