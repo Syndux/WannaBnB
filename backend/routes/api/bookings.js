@@ -68,14 +68,14 @@ router.put("/:id", requireAuth, validateBookingBody, async (req, res, next) => {
       status: 404,
       message: "Booking couldn't be found",
     });
-  };
+  }
 
-  if(booking.endDate <= new Date()) {
+  if (booking.endDate <= new Date()) {
     return next({
       status: 403,
       message: "Past bookings can't be modified",
     });
-  };
+  }
 
   const conflictBookings = await Booking.findAll({
     where: {
@@ -132,7 +132,8 @@ router.put("/:id", requireAuth, validateBookingBody, async (req, res, next) => {
   }
 
   await booking.update({
-    startDate, endDate,
+    startDate,
+    endDate,
   });
 
   return res.json(booking);
@@ -143,6 +144,44 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
   const bookingId = +req.params.id;
   const userId = +req.user.id;
 
-  
+  const booking = await Booking.findByPk(bookingId, {
+    include: {
+      model: Spot,
+      attributes: ["ownerId"],
+    },
+  });
+
+  if(!booking) {
+    return next({
+      status: 404,
+      message: "Booking couldn't be found",
+    });
+  }
+
+  if (userId !== booking.userId && userId !== booking.Spot.ownerId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "Forbidden";
+    return next(err);
+  }
+
+  const startDate = booking.startDate;
+  const endDate = booking.endDate;
+  const nowDate = new Date();
+
+  if(nowDate > startDate && nowDate < endDate) {
+    return next({
+      status: 403,
+      message: "Bookings that have been started can't be deleted",
+    });
+  }
+
+  await booking.destroy();
+
+  return res.json({
+    status: 200,
+    message: "Successfully deleted"
+  });
+
 });
 module.exports = router;
