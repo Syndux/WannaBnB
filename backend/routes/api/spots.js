@@ -438,9 +438,11 @@ router.get("", validateQueryParams, async (req, res, next) => {
       ],
     },
     where: queryOptions,
-    limit: parseInt(size),
     offset: parseInt(page) * parseInt(size),
+    // limit: parseInt(size),
   });
+
+  console.log(spots);
 
   return res.json({ Spots: spots, page: parseInt(page), size: parseInt(size) });
 });

@@ -28,7 +28,6 @@ const validateLogin = [
 ];
 
 const validateSignup = [
-  check("email").exists({ checkFalsy: true }).withMessage("Email is required"),
   check("email").isEmail().withMessage("Invalid email"),
   check("username").exists({ checkFalsy: true }).withMessage("Username is required"),
   check("firstName")
@@ -37,6 +36,7 @@ const validateSignup = [
   check("lastName")
     .exists({ checkFalsy: true })
     .withMessage("Last Name is required"),
+  check("password").exists({ checkFalsy: true }).withMessage("Password is required"),
   handleValidationErrors,
 ];
 
@@ -110,11 +110,15 @@ const validateQueryParams = [
   check("minPrice")
     .optional()
     .isFloat({ min: 0 })
-    .withMessage("Minimum price must be a decimal number greater than or equal to 0"),
+    .withMessage(
+      "Minimum price must be a decimal number greater than or equal to 0"
+    ),
   check("maxPrice")
     .optional()
     .isFloat({ min: 0 })
-    .withMessage("Maximum price must be a decimal number greater than or equal to 0"),
+    .withMessage(
+      "Maximum price must be a decimal number greater than or equal to 0"
+    ),
 ];
 
 module.exports = {
