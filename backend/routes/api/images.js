@@ -26,6 +26,8 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
   const imageType = image.imageableType;
 
   if (imageType === "Spot") {
+    const spot = await image.getSpot();
+
     if (userId !== spot.ownerId) {
       const err = new Error("Authorization required");
       err.status = 403;
@@ -35,6 +37,8 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
   }
 
   if (imageType === "Review") {
+    const review = await image.getReview();
+
     if (userId !== review.userId) {
       const err = new Error("Authorization required");
       err.status = 403;
