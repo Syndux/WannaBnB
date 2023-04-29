@@ -34,7 +34,7 @@ router.get("/owned", requireAuth, async (req, res) => {
         [sequelize.col("Images.url"), "previewImage"],
       ],
     },
-    group: ["Spot.id"],
+    group: ["Spot.id", "Images.url"],
   });
 
   prettifyDateTime(ownedSpots);
