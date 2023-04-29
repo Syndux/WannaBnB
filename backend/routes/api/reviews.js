@@ -1,11 +1,9 @@
 const express = require("express");
-const { Op } = require("sequelize");
-const bcrypt = require("bcryptjs");
-const { check } = require("express-validator");
 
-const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
+const { requireAuth } = require("../../utils/auth");
 const { validateReviewBody } = require("../../utils/validation");
 const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/models");
+const { prettifyDateTime } = require("../../utils/helpers");
 
 const router = express.Router();
 
@@ -39,15 +37,17 @@ router.get("/current", requireAuth, async (req, res, next) => {
     ],
   });
 
+  prettifyDateTime(userReviews);
+
   for (const review of userReviews) {
     const spotPreviewImage = await Image.findOne({
       where: { imageableId: review.Spot.id, imageableType: "Spot", preview: true },
       attributes: ["url"],
     });
 
-    spotPreviewImage
-      ? (review.Spot.dataValues.previewImage = spotPreviewImage.url)
-      : (review.Spot.dataValues.previewImage = null);
+    review.Spot.dataValues.previewImage = spotPreviewImage
+      ? spotPreviewImage.url
+      : null;
   }
 
   return res.json({ Reviews: userReviews });
@@ -82,7 +82,7 @@ router.post("/:id/images", requireAuth, async (req, res, next) => {
 
   if (imageData[0].dataValues.imageCount >= 10) {
     return next({
-      status: 403,
+      status: 400,
       message: "Maximum number of images for this resource was reached",
     });
   }
@@ -124,7 +124,38 @@ router.put("/:id", requireAuth, validateReviewBody, async (req, res, next) => {
     stars,
   });
 
+  prettifyDateTime(updatedReview);
+
   return res.json(updatedReview);
+});
+
+// Delete a review
+router.delete("/:id", requireAuth, async (req, res, next) => {
+  const reviewId = req.params.id;
+  const userId = req.user.id;
+
+  const review = await Review.findByPk(reviewId);
+
+  if (!review) {
+    return next({
+      status: 404,
+      message: "Review couldn't be found",
+    });
+  }
+
+  if(userId !== review.userId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "Forbidden";
+    return next(err);
+  }
+
+  await review.destroy();
+
+  return res.json({
+    message: "Successfully deleted",
+    statusCode: 200,
+  });
 });
 
 module.exports = router;
