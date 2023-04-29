@@ -2,7 +2,7 @@
 const express = require("express");
 const { Op } = require("sequelize");
 
-const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
+const { requireAuth } = require("../../utils/auth");
 const {
   validateSpotBody,
   validateReviewBody,
@@ -10,7 +10,7 @@ const {
   validateQueryParams,
 } = require("../../utils/validation");
 const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/models");
-
+const { prettifyDateTime } = require("../../utils/helpers.js");
 const router = express.Router();
 
 // Get spots of current user
@@ -36,6 +36,8 @@ router.get("/owned", requireAuth, async (req, res) => {
     },
     group: ["Spot.id"],
   });
+
+  prettifyDateTime(ownedSpots);
 
   return res.json({ Spots: ownedSpots });
 });
@@ -425,19 +427,20 @@ router.get("", validateQueryParams, async (req, res, next) => {
     limit: parseInt(size),
   });
 
+  prettifyDateTime(spots);
+
   const spotsWithAggregateData = [];
 
   for (const spot of spots) {
     const reviews = await spot.getReviews();
-    const avgRating = reviews.length > 0
-      ? reviews.reduce((total, review) => total + review.stars, 0) / reviews.length
-      : null;
-  
+    const avgRating =
+      reviews.length > 0
+        ? reviews.reduce((total, review) => total + review.stars, 0) / reviews.length
+        : null;
+
     const images = await spot.getImages({ where: { preview: true } });
-    const previewImage = images.length > 0
-      ? images[0].url
-      : null;
-  
+    const previewImage = images.length > 0 ? images[0].url : null;
+
     spotsWithAggregateData.push({
       ...spot.toJSON(),
       avgRating,
@@ -445,7 +448,11 @@ router.get("", validateQueryParams, async (req, res, next) => {
     });
   }
 
-  return res.json({ Spots: spotsWithAggregateData, page: parseInt(page), size: parseInt(size) });
+  return res.json({
+    Spots: spotsWithAggregateData,
+    page: parseInt(page),
+    size: parseInt(size),
+  });
 });
 
 // Add new spot
