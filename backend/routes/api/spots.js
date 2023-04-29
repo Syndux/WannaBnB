@@ -17,29 +17,31 @@ const router = express.Router();
 router.get("/owned", requireAuth, async (req, res) => {
   const ownedSpots = await Spot.findAll({
     where: { ownerId: req.user.id },
-    include: [
-      {
-        model: Review,
-        attributes: [],
-      },
-      {
-        model: Image,
-        attributes: [],
-        where: { preview: true },
-      },
-    ],
-    attributes: {
-      include: [
-        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
-        [sequelize.col("Images.url"), "previewImage"],
-      ],
-    },
-    group: ["Spot.id", "Images.url"],
+    group: ["Spot.id"],
   });
 
   prettifyDateTime(ownedSpots);
 
-  return res.json({ Spots: ownedSpots });
+  const spotsWithAggregateData = [];
+
+  for (const spot of spots) {
+    const reviews = await spot.getReviews();
+    const avgRating =
+      reviews.length > 0
+        ? reviews.reduce((total, review) => total + review.stars, 0) / reviews.length
+        : null;
+
+    const images = await spot.getImages({ where: { preview: true } });
+    const previewImage = images.length > 0 ? images[0].url : null;
+
+    spotsWithAggregateData.push({
+      ...spot.toJSON(),
+      avgRating,
+      previewImage,
+    });
+  }
+
+  return res.json({ Spots: spotsWithAggregateData });
 });
 
 // Add Image to a spot
