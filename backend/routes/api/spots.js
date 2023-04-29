@@ -24,7 +24,7 @@ router.get("/owned", requireAuth, async (req, res) => {
 
   const spotsWithAggregateData = [];
 
-  for (const spot of spots) {
+  for (const spot of ownedSpots) {
     const reviews = await spot.getReviews();
     const avgRating =
       reviews.length > 0
