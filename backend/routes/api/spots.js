@@ -419,32 +419,33 @@ router.get("", validateQueryParams, async (req, res, next) => {
   }
 
   const spots = await Spot.findAll({
-    include: [
-      {
-        model: Review,
-        attributes: [],
-      },
-      {
-        model: Image,
-        attributes: [],
-        where: { preview: true },
-      },
-    ],
     group: ["Spot.id"],
-    attributes: {
-      include: [
-        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
-        [sequelize.col("Images.url"), "previewImage"],
-      ],
-    },
     where: queryOptions,
     offset: parseInt(page) * parseInt(size),
-    // limit: parseInt(size),
+    limit: parseInt(size),
   });
 
-  console.log(spots);
+  const spotsWithAggregateData = [];
 
-  return res.json({ Spots: spots, page: parseInt(page), size: parseInt(size) });
+  for (const spot of spots) {
+    const reviews = await spot.getReviews();
+    const avgRating = reviews.length > 0
+      ? reviews.reduce((total, review) => total + review.stars, 0) / reviews.length
+      : null;
+  
+    const images = await spot.getImages({ where: { preview: true } });
+    const previewImage = images.length > 0
+      ? images[0].url
+      : null;
+  
+    spotsWithAggregateData.push({
+      ...spot.toJSON(),
+      avgRating,
+      previewImage,
+    });
+  }
+
+  return res.json({ Spots: spotsWithAggregateData, page: parseInt(page), size: parseInt(size) });
 });
 
 // Add new spot
