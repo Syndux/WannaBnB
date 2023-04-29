@@ -10,7 +10,7 @@ const {
   validateQueryParams,
 } = require("../../utils/validation");
 const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/models");
-const { prettifyDateTime } = require("../../utils/helpers.js");
+const { prettifyDateTime, prettifyStartEnd } = require("../../utils/helpers.js");
 const router = express.Router();
 
 // Get spots of current user
@@ -98,6 +98,7 @@ router.get("/:id/reviews", async (req, res, next) => {
   });
 
   if (reviews.length) {
+    prettifyDateTime(reviews);
     return res.json({ Reviews: reviews });
   } else {
     return next({
@@ -152,6 +153,8 @@ router.post(
       stars,
     });
 
+    prettifyDateTime(newReview);
+
     return res.status(201).json(newReview);
   }
 );
@@ -182,12 +185,15 @@ router.get("/:id/bookings", requireAuth, async (req, res, next) => {
     ];
   }
 
-  console.log(attributes);
-
   const bookings = await Booking.findAll({
     where: { spotId },
     ...attributes,
   });
+
+  if(bookings[0].dataValues.createdAt) {
+    prettifyDateTime(bookings);
+  }
+  prettifyStartEnd(bookings);
 
   return res.json({ Bookings: bookings });
 });
@@ -278,6 +284,9 @@ router.post(
       endDate,
     });
 
+    prettifyStartEnd(newBooking);
+    prettifyDateTime(newBooking);
+
     return res.json(newBooking);
   }
 );
@@ -313,6 +322,7 @@ router.get("/:id", async (req, res, next) => {
   });
 
   if (spot) {
+    prettifyDateTime(spot);
     return res.json(spot);
   } else {
     return next({
@@ -356,6 +366,8 @@ router.put("/:id", requireAuth, validateSpotBody, async (req, res, next) => {
     description,
     price,
   });
+
+  prettifyDateTime(updatedSpot);
 
   return res.json(updatedSpot);
 });
@@ -474,6 +486,7 @@ router.post("", requireAuth, validateSpotBody, async (req, res, next) => {
       description,
       price,
     });
+    prettifyDateTime(newSpot);
 
     return res.status(201).json(newSpot);
   } catch (err) {

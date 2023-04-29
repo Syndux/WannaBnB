@@ -1,9 +1,10 @@
 const express = require("express");
 const { Op } = require("sequelize");
 
-const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth");
+const { requireAuth } = require("../../utils/auth");
 const { validateBookingBody } = require("../../utils/validation");
 const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/models");
+const { prettifyDateTime, prettifyStartEnd } = require("../../utils/helpers");
 
 const router = express.Router();
 
@@ -26,18 +27,12 @@ router.get("/current", requireAuth, async (req, res, next) => {
     },
   });
 
-  for (const booking of bookings) {
-    booking.dataValues.startDate = booking.startDate.toISOString().substring(0, 10);
-    booking.dataValues.endDate = booking.endDate.toISOString().substring(0, 10);
+  prettifyDateTime(bookings);
+  prettifyStartEnd(bookings);
 
-    booking.dataValues.createdAt = booking.createdAt
-      .toISOString()
-      .replace("T", " ")
-      .substring(0, 19);
-    booking.dataValues.updatedAt = booking.updatedAt
-      .toISOString()
-      .replace("T", " ")
-      .substring(0, 19);
+  for (const booking of bookings) {
+    // booking.dataValues.startDate = booking.startDate.toISOString().substring(0, 10);
+    // booking.dataValues.endDate = booking.endDate.toISOString().substring(0, 10);
 
     const spotPreviewImage = await Image.findOne({
       where: { imageableId: booking.Spot.id, imageableType: "Spot", preview: true },
@@ -67,6 +62,13 @@ router.put("/:id", requireAuth, validateBookingBody, async (req, res, next) => {
     });
   }
 
+  if (userId !== booking.userId) {
+    const err = new Error("Authorization required");
+    err.status = 403;
+    err.message = "Forbidden";
+    return next(err);
+  }
+
   if (booking.endDate <= new Date()) {
     return next({
       status: 403,
@@ -77,27 +79,33 @@ router.put("/:id", requireAuth, validateBookingBody, async (req, res, next) => {
   const conflictBookings = await Booking.findAll({
     where: {
       spotId: booking.spotId,
-      userId: { [Op.not]: userId },
-      [Op.or]: [
+      [Op.and]: [
         {
-          startDate: {
-            [Op.between]: [
-              `${new Date(startDate).toISOString()}`,
-              `${new Date(endDate).toISOString()}`,
-            ],
-          },
+          id: { [Op.ne]: bookingId },
         },
         {
-          endDate: {
-            [Op.between]: [
-              `${new Date(startDate).toISOString()}`,
-              `${new Date(endDate).toISOString()}`,
-            ],
-          },
-        },
-        {
-          startDate: { [Op.lte]: startDate },
-          endDate: { [Op.gte]: endDate },
+          [Op.or]: [
+            {
+              startDate: {
+                [Op.between]: [
+                  `${new Date(startDate).toISOString()}`,
+                  `${new Date(endDate).toISOString()}`,
+                ],
+              },
+            },
+            {
+              endDate: {
+                [Op.between]: [
+                  `${new Date(startDate).toISOString()}`,
+                  `${new Date(endDate).toISOString()}`,
+                ],
+              },
+            },
+            {
+              startDate: { [Op.lte]: startDate },
+              endDate: { [Op.gte]: endDate },
+            },
+          ],
         },
       ],
     },
@@ -132,6 +140,9 @@ router.put("/:id", requireAuth, validateBookingBody, async (req, res, next) => {
     startDate,
     endDate,
   });
+
+  prettifyStartEnd(booking);
+  prettifyDateTime(booking);
 
   return res.json(booking);
 });

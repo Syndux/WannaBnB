@@ -3,6 +3,7 @@ const express = require("express");
 const { requireAuth } = require("../../utils/auth");
 const { validateReviewBody } = require("../../utils/validation");
 const { User, Booking, Spot, Review, Image, sequelize } = require("../../db/models");
+const { prettifyDateTime } = require("../../utils/helpers");
 
 const router = express.Router();
 
@@ -35,6 +36,8 @@ router.get("/current", requireAuth, async (req, res, next) => {
       },
     ],
   });
+
+  prettifyDateTime(userReviews);
 
   for (const review of userReviews) {
     const spotPreviewImage = await Image.findOne({
@@ -120,6 +123,8 @@ router.put("/:id", requireAuth, validateReviewBody, async (req, res, next) => {
     review,
     stars,
   });
+
+  prettifyDateTime(updatedReview);
 
   return res.json(updatedReview);
 });
