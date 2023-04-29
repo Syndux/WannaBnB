@@ -68,6 +68,20 @@ const validateReviewBody = [
   handleValidationErrors,
 ];
 
+const validateBookingBody = [
+  check("endDate", "endDate cannot be on or before startDate").custom(
+    (value, { req }) => {
+      const startDate = new Date(req.body.startDate);
+      const endDate = new Date(req.body.endDate);
+      if (startDate >= endDate) {
+        throw new Error("endDate cannot be on or before startDate");
+      }
+      return true;
+    }
+  ),
+  handleValidationErrors,
+];
+
 const validateQueryParams = [
   check("page")
     .optional()
@@ -96,15 +110,11 @@ const validateQueryParams = [
   check("minPrice")
     .optional()
     .isFloat({ min: 0 })
-    .withMessage(
-      "Minimum price must be a decimal number greater than or equal to 0"
-    ),
+    .withMessage("Minimum price must be a decimal number greater than or equal to 0"),
   check("maxPrice")
     .optional()
     .isFloat({ min: 0 })
-    .withMessage(
-      "Maximum price must be a decimal number greater than or equal to 0"
-    ),
+    .withMessage("Maximum price must be a decimal number greater than or equal to 0"),
 ];
 
 module.exports = {
