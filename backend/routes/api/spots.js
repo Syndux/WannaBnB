@@ -388,7 +388,7 @@ router.delete("/:id", requireAuth, async (req, res, next) => {
 });
 
 // Get all spots
-router.get("", validateQueryParams, async (_req, res) => {
+router.get("", validateQueryParams, async (req, res, next) => {
   const {
     page = 0,
     size = 20,
