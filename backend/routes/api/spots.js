@@ -192,7 +192,7 @@ router.get("/:id/bookings", requireAuth, async (req, res, next) => {
     ...attributes,
   });
 
-  if(bookings[0].dataValues.createdAt) {
+  if (bookings[0].dataValues.createdAt) {
     prettifyDateTime(bookings);
   }
   prettifyStartEnd(bookings);
@@ -297,49 +297,32 @@ router.post(
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
 
-  const spot = await Spot.findByPk(id, {
-    include: [
-      {
-        model: Review,
-        attributes: [],
-      },
-      {
-        model: Image,
-        attributes: ["id", "url", "preview"],
-        as: "SpotImages",
-      },
-      {
-        model: User,
-        attributes: ["id", "firstName", "lastName"],
-        as: "Owner",
-      },
-    ],
-    attributes: {
-      include: [
-        [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
-        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgStarRating"],
-      ],
-    },
-    group: ["SpotImages.id"],
-  });
+  const spot = await Spot.findByPk(id);
 
-  if(!spot) {
+  if (!spot) {
     return next({
       status: 404,
       message: "Spot couldn't be found",
     });
   }
-  
-  const reviews = await spot.getReviews();
+
   const numReviews = await spot.countReviews();
+
+  const reviews = await spot.getReviews();
   const avgStarRating =
-  reviews.length > 0
-    ? reviews.reduce((total, review) => total + review.stars, 0) / reviews.length
-    : null;
+    reviews.length > 0
+      ? reviews.reduce((total, review) => total + review.stars, 0) / reviews.length
+      : null;
+
+  const SpotImages = await spot.getImages({ attributes: ["id", "url", "preview"] });
+  const Owner = await User.findOne({
+    where: { id: spot.ownerId },
+    attributes: ["id", "firstName", "lastName"],
+  });
 
   prettifyDateTime(spot);
-  
-  resSpot = {...spot.toJSON(), avgStarRating, numReviews};
+
+  resSpot = { ...spot.toJSON(), numReviews, avgStarRating, SpotImages, Owner};
 
   return res.json(resSpot);
 });
