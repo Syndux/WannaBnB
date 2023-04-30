@@ -314,24 +314,34 @@ router.get("/:id", async (req, res, next) => {
         as: "Owner",
       },
     ],
-    attributes: {
-      include: [
-        [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
-        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgStarRating"],
-      ],
-    },
-    group: ["SpotImages.id", "Spot.id"],
+    // attributes: {
+    //   include: [
+    //     [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
+    //     [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgStarRating"],
+    //   ],
+    // },
+    group: ["SpotImages.id"],
   });
 
-  if (spot) {
-    prettifyDateTime(spot);
-    return res.json(spot);
-  } else {
+  if(!spot) {
     return next({
       status: 404,
       message: "Spot couldn't be found",
     });
   }
+  
+  const reviews = await spot.getReviews();
+  const numReviews = await spot.countReviews();
+  const avgRating =
+  reviews.length > 0
+    ? reviews.reduce((total, review) => total + review.stars, 0) / reviews.length
+    : null;
+
+  prettifyDateTime(spot);
+  
+  resSpot = {...spot.toJSON(), avgRating, numReviews};
+
+  return res.json(resSpot);
 });
 
 // Edit spot by id
