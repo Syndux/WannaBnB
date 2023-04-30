@@ -314,12 +314,12 @@ router.get("/:id", async (req, res, next) => {
         as: "Owner",
       },
     ],
-    // attributes: {
-    //   include: [
-    //     [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
-    //     [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgStarRating"],
-    //   ],
-    // },
+    attributes: {
+      include: [
+        [sequelize.fn("COUNT", sequelize.col("Reviews.id")), "numReviews"],
+        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgStarRating"],
+      ],
+    },
     group: ["SpotImages.id"],
   });
 
@@ -332,14 +332,14 @@ router.get("/:id", async (req, res, next) => {
   
   const reviews = await spot.getReviews();
   const numReviews = await spot.countReviews();
-  const avgRating =
+  const avgStarRating =
   reviews.length > 0
     ? reviews.reduce((total, review) => total + review.stars, 0) / reviews.length
     : null;
 
   prettifyDateTime(spot);
   
-  resSpot = {...spot.toJSON(), avgRating, numReviews};
+  resSpot = {...spot.toJSON(), avgStarRating, numReviews};
 
   return res.json(resSpot);
 });
