@@ -430,6 +430,7 @@ router.get("", validateQueryParams, async (req, res, next) => {
   const spots = await Spot.findAll({
     group: ["Spot.id"],
     where: queryOptions,
+    order: sequelize.col('id'),
     offset: parseInt(page) * parseInt(size),
     limit: parseInt(size),
   });
