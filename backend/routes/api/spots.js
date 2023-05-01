@@ -36,9 +36,6 @@ router.get("/owned", requireAuth, async (req, res) => {
 
     spotsWithAggregateData.push({
       ...spot.toJSON(),
-      lat: parseInt(spot.lat, 10),
-      lng: parseInt(spot.lng, 10),
-      price: parseInt(spot.price, 10),
       avgRating,
       previewImage,
     });
