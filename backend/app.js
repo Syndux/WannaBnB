@@ -82,7 +82,7 @@ app.use((err, _req, res, _next) => {
     response.stack = err.stack;
   }
   
-  res.json({ response });
+  res.json(response);
 });
 
 module.exports = app;
