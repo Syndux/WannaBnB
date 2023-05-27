@@ -60,7 +60,7 @@ router.post("/login", validateLogin, async (req, res, next) => {
 });
 
 // Signup
-router.post("", validateSignup, async (req, res, next) => {
+router.post("/", validateSignup, async (req, res, next) => {
   const { firstName, lastName, email, username, password } = req.body;
 
   const existingUser = await User.unscoped().findOne({
@@ -106,6 +106,12 @@ router.post("", validateSignup, async (req, res, next) => {
   safeUser.token = await setTokenCookie(res, safeUser);
 
   return res.json({ user: safeUser });
+});
+
+// Log out
+router.delete("/", (_req, res) => {
+  res.clearCookie("token");
+  return res.json({ message: "success" });
 });
 
 module.exports = router;
