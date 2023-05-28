@@ -1,5 +1,5 @@
 ## Introduction
-A wanna-be AirBnB clone, WannaBnB, by Huey Nguyen.
+A wanna-be AirBnB, WannaBnB, by Huey Nguyen.
 
 ## List of technologies used on the project.
 - Express
