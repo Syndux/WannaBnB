@@ -17,12 +17,14 @@
 }
 
 .profile-button button {
+  align-items: center;
   background: none;
-  cursor: pointer;
   border: 1px solid #000000;
   border-radius: 15px;
+  cursor: pointer;
+  display: flex;
   height: 30px;
-  padding: 5px 10px 4px;
+  padding: 5px 10px;
 }
 
 .fa-bars {
@@ -43,9 +45,12 @@
   display: none;
 }
 
-.profile-dropdown li {
+.profile-dropdown li , .profile-dropdown p{
   margin: 4px 50px 4px 10px;
   white-space: nowrap;
+}
+
+.profile-dropdown li {
   cursor: pointer;
 }
 
