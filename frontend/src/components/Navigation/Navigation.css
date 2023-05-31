@@ -14,6 +14,7 @@
 .profile-button {
   position: relative;
   margin-left: auto;
+  z-index: 1000;
 }
 
 .profile-button button {
