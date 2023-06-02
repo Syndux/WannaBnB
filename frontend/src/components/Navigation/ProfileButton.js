@@ -56,8 +56,8 @@ function ProfileButton({ user }) {
           </>
         ) : (
           <>
-            <SignUpFormModal />
-            <LoginFormModal />
+            <SignUpFormModal onClick={closeMenu}/>
+            <LoginFormModal onClick={closeMenu}/>
           </>
         )}
       </ul>
