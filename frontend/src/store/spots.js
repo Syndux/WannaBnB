@@ -27,7 +27,7 @@ const initialState = {
 
 // Reducer
 const spotsReducer = (state = initialState, action) => {
-  let newState;
+  //let newState;
   switch (action.type) {
     case LOAD:
       const spotsMap = {};
