@@ -5,7 +5,7 @@ import * as sessionActions from "../../store/session";
 
 import "./SignupForm.css";
 
-function SignupFormPage() {
+function SignUpForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -46,73 +46,73 @@ function SignupFormPage() {
     <div className="signup-container">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
+        <div className="signup-form-group">
           <input
             type="text"
             id="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        {errors.email && <p className="error-message">{errors.email}</p>}
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
+        {errors.email && <p className="signup-error-message">{errors.email}</p>}
+        <div className="signup-form-group">
           <input
             type="text"
             id="username"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>
-        {errors.username && <p className="error-message">{errors.username}</p>}
-        <div className="form-group">
-          <label htmlFor="firstName">First Name</label>
+        {errors.username && <p className="signup-error-message">{errors.username}</p>}
+        <div className="signup-form-group">
           <input
             type="text"
             id="firstName"
+            placeholder="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
         </div>
-        {errors.firstName && <p className="error-message">{errors.firstName}</p>}
-        <div className="form-group">
-          <label htmlFor="lastName">Last Name</label>
+        {errors.firstName && <p className="signup-error-message">{errors.firstName}</p>}
+        <div className="signup-form-group">
           <input
             type="text"
             id="lastName"
+            placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
         </div>
-        {errors.lastName && <p className="error-message">{errors.lastName}</p>}
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
+        {errors.lastName && <p className="signup-error-message">{errors.lastName}</p>}
+        <div className="signup-form-group">
           <input
             type="password"
             id="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        {errors.password && <p className="error-message">{errors.password}</p>}
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password</label>
+        {errors.password && <p className="signup-error-message">{errors.password}</p>}
+        <div className="signup-form-group">
           <input
             type="password"
             id="confirmPassword"
+            placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </div>
         {errors.confirmPassword && (
-          <p className="error-message">{errors.confirmPassword}</p>
+          <p className="signup-error-message">{errors.confirmPassword}</p>
         )}
         <button type="submit" className="signup-button">
           Sign Up
@@ -122,4 +122,4 @@ function SignupFormPage() {
   );
 };
 
-export default SignupFormPage;
+export default SignUpForm;
