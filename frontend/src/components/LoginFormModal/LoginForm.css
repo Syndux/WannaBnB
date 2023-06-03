@@ -7,6 +7,7 @@
 
 .login-container h1 {
   font-size: 26px;
+  margin-bottom: 5px;
 }
 
 .login-form-group {
@@ -26,13 +27,13 @@
 .login-error-message {
   color: red;
   font-size: 14px;
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 .login-button {
   padding: 10px;
   font-size: 12px;
-  background-color: #0066ff;
+  background-color: #FF5A5F;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -41,5 +42,5 @@
 }
 
 .login-button:hover {
-  background-color: #0062b3;
+  background-color: #ff5a60e8;
 }

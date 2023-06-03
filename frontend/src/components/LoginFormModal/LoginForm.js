@@ -20,6 +20,7 @@ function LoginForm() {
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
         const data = await res.json();
+        if(data.message) data.errors = {credential: data.message};
         if (data && data.errors) setErrors(data.errors);
       }
     );
@@ -29,6 +30,7 @@ function LoginForm() {
     <div className="login-container">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
+        {errors.credential && <p className="login-error-message">{errors.credential}</p>}
         <div className="login-form-group">
           <input
             type="text"
@@ -49,7 +51,6 @@ function LoginForm() {
             required
           />
         </div>
-        {errors.credential && <p className="login-error-message">{errors.credential}</p>}
         <button type="submit" className="login-button">Log In</button>
       </form>
     </div>
