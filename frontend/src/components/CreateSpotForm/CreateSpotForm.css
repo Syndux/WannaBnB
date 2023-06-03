@@ -1,0 +1,55 @@
+.spot-create-outer-container {
+  display: flex;
+  justify-content: center;
+}
+
+.spot-create-inner-container {
+  width: 400px;
+}
+
+.form-heading {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.subheading {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.spot-create-section {
+  margin-top: 20px;
+}
+
+.spot-create-section label {
+  display: block;
+  font-weight: bold;
+}
+
+.spot-create-section input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  background-color: #E8F0FE;
+}
+
+.spot-create-section button {
+  background-color: #FF5A5F;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.spot-create-section button:hover {
+  background-color: #ff5a60e8;
+}
+
+/* Rest of the existing styles */
