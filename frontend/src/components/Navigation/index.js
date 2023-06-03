@@ -15,7 +15,16 @@ function Navigation({ isLoaded }) {
         <img src={airbnbLogo} alt="Logo" width="100" height="30" />
       </NavLink>
 
-      {isLoaded && <ProfileButton user={sessionUser} />}
+      {isLoaded && (
+        <>
+          {sessionUser && (
+            <NavLink to="/spots/new" className="nav-link">
+              Create a New Spot
+            </NavLink>
+          )}
+          <ProfileButton user={sessionUser} />
+        </>
+      )}
     </div>
   );
 }
