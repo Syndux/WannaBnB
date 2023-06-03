@@ -11,9 +11,13 @@
   margin-right: auto;
 }
 
+.new-spot-link {
+  color: #00525E;
+  margin: 0px 15px 0px auto;
+}
+
 .profile-button {
   position: relative;
-  margin-left: auto;
   z-index: 1000;
 }
 
