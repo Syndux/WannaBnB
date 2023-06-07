@@ -1,6 +1,7 @@
 .spot-create-container {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .spot-create-form-container {

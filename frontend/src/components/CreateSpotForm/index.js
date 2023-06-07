@@ -88,8 +88,8 @@ function CreateSpotForm() {
         address,
         city,
         state,
-        latitude,
-        longitude,
+        lat: latitude,
+        lng: longitude,
         description,
         name,
         price,
@@ -104,6 +104,7 @@ function CreateSpotForm() {
     <div className="spot-create-container">
       <form className="spot-create-form-container" onSubmit={handleSubmit}>
         <h1 className="form-heading">Create a New Spot</h1>
+
         {/* Spot location */}
         <div className="spot-create-section-header">
           <p className="subheading">Where's your place located?</p>
@@ -208,7 +209,7 @@ function CreateSpotForm() {
         <div className="spot-create-section">
           <textarea
             id="description"
-            placeholder="Please write at least 30 characters"
+            placeholder="Description"
             rows="6"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
