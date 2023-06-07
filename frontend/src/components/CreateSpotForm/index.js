@@ -228,7 +228,13 @@ function CreateSpotForm() {
           </p>
         </div>
         <div className="spot-create-section">
-          <input type="text" id="name" placeholder="Name of your spot" />
+          <input
+            type="text"
+            id="name"
+            placeholder="Name of your spot"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
           {formErrors.name && (
             <span className="error-message error-name">{formErrors.name}</span>
           )}
@@ -244,7 +250,14 @@ function CreateSpotForm() {
         </div>
         <div className="spot-create-section">
           <div className="input-price-container">
-            $ <input type="text" id="price" placeholder="Price per night (USD)" />
+            ${" "}
+            <input
+              type="text"
+              id="price"
+              placeholder="Price per night (USD)"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
           </div>
           {formErrors.price && (
             <span className="error-message error-price">{formErrors.price}</span>
@@ -259,14 +272,46 @@ function CreateSpotForm() {
           </p>
         </div>
         <div className="spot-create-section">
-          <input type="url" id="preview-image" placeholder="Preview Image URL" />
+          <input
+            type="url"
+            id="preview-image"
+            placeholder="Preview Image URL"
+            value={previewImage}
+            onChange={(e) => setPreviewImage(e.target.value)}
+          />
           {formErrors.previewImage && (
-            <span className="error-message error-image">{formErrors.previewImage}</span>
+            <span className="error-message error-image">
+              {formErrors.previewImage}
+            </span>
           )}
-          <input type="url" id="image-1" placeholder="Image URL" />
-          <input type="url" id="image-2" placeholder="Image URL" />
-          <input type="url" id="image-3" placeholder="Image URL" />
-          <input type="url" id="image-4" placeholder="Image URL" />
+          <input
+            type="url"
+            id="image-1"
+            placeholder="Image URL"
+            value={image1}
+            onChange={(e) => setImage1(e.target.value)}
+          />
+          <input
+            type="url"
+            id="image-2"
+            placeholder="Image URL"
+            value={image2}
+            onChange={(e) => setImage2(e.target.value)}
+          />
+          <input
+            type="url"
+            id="image-3"
+            placeholder="Image URL"
+            value={image3}
+            onChange={(e) => setImage3(e.target.value)}
+          />
+          <input
+            type="url"
+            id="image-4"
+            placeholder="Image URL"
+            value={image4}
+            onChange={(e) => setImage4(e.target.value)}
+          />
         </div>
 
         <div className="button-container">
