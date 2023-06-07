@@ -1,9 +1,9 @@
-.spot-create-outer-container {
+.spot-create-container {
   display: flex;
   justify-content: center;
 }
 
-.spot-create-inner-container {
+.spot-create-form-container {
   width: 400px;
 }
 
@@ -15,41 +15,79 @@
 .subheading {
   font-size: 18px;
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .description {
   font-size: 14px;
   font-weight: normal;
+  margin-top: 0px;
 }
 
 .spot-create-section {
-  margin-top: 20px;
+  margin-top: 10px;
+  border-bottom: 2px solid black;
 }
 
 .spot-create-section label {
-  display: block;
-  font-weight: bold;
+  font-size: 14px;
 }
 
 .spot-create-section input {
   width: 100%;
-  padding: 5px;
-  margin-top: 5px;
-  margin-bottom: 15px;
+  padding: 2px 3px;
+  margin-top: 2px;
+  margin-bottom: 10px;
   background-color: #E8F0FE;
+  box-sizing: border-box;
+  font-size: 12px;
 }
 
-.spot-create-section button {
+.spot-create-section textarea {
+  background-color: #E8F0FE;
+  padding: 5px;
+  width: 100%;
+  border: 2px solid black;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.input-price {
+  display: flex;
+  align-items: baseline;
+  font-weight: bold;
+}
+
+.input-price input {
+  margin-left: 5px;
+  font-weight: normal;
+}
+
+.error-message {
+  color: red;
+  font-weight: normal;
+  margin-left: 5px;
+}
+
+.error-description {
+  margin-left: 0px;
+  font-size: 14px;
+}
+
+.button-container {
+  margin: 20px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.spot-create-button {
   background-color: #FF5A5F;
   color: white;
-  border: none;
-  border-radius: 5px;
+  border: 2px solid black;
   cursor: pointer;
-
+  box-shadow: 2px 2px 5px black;
 }
 
-.spot-create-section button:hover {
+.spot-create-button:hover {
   background-color: #ff5a60e8;
 }
-
-/* Rest of the existing styles */
