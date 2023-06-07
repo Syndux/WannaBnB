@@ -23,6 +23,12 @@ function CreateSpotForm() {
   const [image4, setImage4] = useState("");
   const [formErrors, setFormErrors] = useState({});
 
+  const isValidImageURL = (url) => {
+    const validExtensions = [".png", ".jpg", ".jpeg"];
+    const extension = url.slice(url.lastIndexOf(".")).toLowerCase();
+    return validExtensions.includes(extension);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -54,6 +60,24 @@ function CreateSpotForm() {
     }
     if (price === "") {
       errors.price = "Price is required";
+    }
+    if (!previewImage) {
+      errors.previewImage = "Preview image is required.";
+    }
+    if (previewImage && !isValidImageURL(previewImage)) {
+      errors.previewImage = "Image URL must end in .png, .jpg, or .jpeg";
+    }
+    if (image1 && !isValidImageURL(image1)) {
+      errors.image1 = "Image URL must end in .png, .jpg, or .jpeg";
+    }
+    if (image2 && !isValidImageURL(image2)) {
+      errors.image2 = "Image URL must end in .png, .jpg, or .jpeg";
+    }
+    if (image3 && !isValidImageURL(image3)) {
+      errors.image3 = "Image URL must end in .png, .jpg, or .jpeg";
+    }
+    if (image4 && !isValidImageURL(image4)) {
+      errors.image4 = "Image URL must end in .png, .jpg, or .jpeg";
     }
 
     setFormErrors(errors);
@@ -189,7 +213,9 @@ function CreateSpotForm() {
             onChange={(e) => setDescription(e.target.value)}
           />
           {formErrors.description && (
-            <span className="error-message error-description">{formErrors.description}</span>
+            <span className="error-message error-description">
+              {formErrors.description}
+            </span>
           )}
         </div>
 
@@ -203,6 +229,9 @@ function CreateSpotForm() {
         </div>
         <div className="spot-create-section">
           <input type="text" id="name" placeholder="Name of your spot" />
+          {formErrors.name && (
+            <span className="error-message error-name">{formErrors.name}</span>
+          )}
         </div>
 
         {/* Spot price */}
@@ -213,8 +242,13 @@ function CreateSpotForm() {
             search results.
           </p>
         </div>
-        <div className="spot-create-section input-price">
-          $ <input type="text" id="price" placeholder="Price per night (USD)" />
+        <div className="spot-create-section">
+          <div className="input-price-container">
+            $ <input type="text" id="price" placeholder="Price per night (USD)" />
+          </div>
+          {formErrors.price && (
+            <span className="error-message error-price">{formErrors.price}</span>
+          )}
         </div>
 
         {/* Spot photos */}
@@ -226,6 +260,9 @@ function CreateSpotForm() {
         </div>
         <div className="spot-create-section">
           <input type="url" id="preview-image" placeholder="Preview Image URL" />
+          {formErrors.previewImage && (
+            <span className="error-message error-image">{formErrors.previewImage}</span>
+          )}
           <input type="url" id="image-1" placeholder="Image URL" />
           <input type="url" id="image-2" placeholder="Image URL" />
           <input type="url" id="image-3" placeholder="Image URL" />
