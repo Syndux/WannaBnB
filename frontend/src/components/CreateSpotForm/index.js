@@ -34,31 +34,31 @@ function CreateSpotForm() {
 
     const errors = {};
 
-    if (country === "") {
+    if (!country) {
       errors.country = "Country is required";
     }
-    if (address === "") {
+    if (!address) {
       errors.address = "Address is required";
     }
-    if (city === "") {
+    if (!city) {
       errors.city = "City is required";
     }
-    if (state === "") {
+    if (!state) {
       errors.state = "State is required";
     }
-    if (latitude === "") {
+    if (!latitude) {
       errors.latitude = "Latitude is required";
     }
-    if (longitude === "") {
+    if (!longitude) {
       errors.longitude = "Longitude is required";
     }
     if (description.length < 30) {
       errors.description = "Description needs a minimum of 30 characters";
     }
-    if (name === "") {
+    if (!name) {
       errors.name = "Name is required";
     }
-    if (price === "") {
+    if (!price) {
       errors.price = "Price is required";
     }
     if (!previewImage) {
