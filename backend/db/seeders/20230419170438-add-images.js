@@ -19,7 +19,7 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://images.squarespace-cdn.com/content/v1/5c3c4ca8365f02e708cc7c8c/1655208861626-MUZ45I4J4JDX4BMUZWEW/Swiss+Interior+Grandeur+Park+Shan-9484.png?format=1500w",
+          url: "https://res.cloudinary.com/brickandbatten/images/f_auto,q_auto/v1640973251/wordpress_assets/53575-CityLoft-GreekVilla-TrBlack-GrandCanal-a/53575-CityLoft-GreekVilla-TrBlack-GrandCanal-a.jpg?_i=AA",
           preview: true,
           imageableId: 1,
           imageableType: "Spot",
@@ -31,7 +31,7 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://images.squarespace-cdn.com/content/v1/5c3c4ca8365f02e708cc7c8c/1661159419900-44SNRH35ZXUF4EZKN3UD/Tampines%2B4-Room%2BHDB%2BBTO%2BLiving%2BRoom%2B1.jpg?format=1000w",
+          url: "https://cdn.sanity.io/images/32lej2m6/production/6e51ae5090f4dd46e25438a9f29f991a5763f806-1024x760.jpg?auto=format",
           preview: true,
           imageableId: 2,
           imageableType: "Spot",
@@ -43,9 +43,57 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://images.squarespace-cdn.com/content/v1/5c3c4ca8365f02e708cc7c8c/5d62c704-02ed-4ae7-9501-bea433811deb/Swiss+Kent+Bedok-0154.png?format=1500w",
+          url: "https://res.cloudinary.com/brickandbatten/image/upload/c_scale,w_464,h_324,dpr_2/f_auto,q_auto/v1641000863/wordpress_assets/22826-ModContemporary-Accents_w-GauntletGray-a-ok.jpg?_i=AA",
           preview: true,
           imageableId: 3,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://media.architecturaldigest.com/photos/571e97c5741fcddb16b559c9/master/w_1280%2Cc_limit/modernist-decor-inspiration-01.jpg",
+          preview: false,
+          imageableId: 4,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://cdn.decoist.com/wp-content/uploads/2021/06/Modular-black-house-with-balcony-49706.jpg",
+          preview: true,
+          imageableId: 4,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://media.architecturaldigest.com/photos/571e97ce818277135ff91620/master/w_1280%2Cc_limit/modernist-decor-inspiration-07.jpg",
+          preview: false,
+          imageableId: 5,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://st.hzcdn.com/simgs/pictures/exteriors/gray-s-crossing-mountain-modern-golf-course-home-in-house-builders-img~caa191290a8fab76_14-8692-1-7195ae8.jpg",
+          preview: true,
+          imageableId: 5,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://media.architecturaldigest.com/photos/571e97c5741fcddb16b559c9/master/w_1280%2Cc_limit/modernist-decor-inspiration-15.jpg",
+          preview: false,
+          imageableId: 6,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://i.pinimg.com/originals/62/77/38/62773802f988fbe872ae82076b3ab153.jpg",
+          preview: true,
+          imageableId: 6,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://www.nichiha.com/uploads/7-Modern-Homes-Using-Wall-Paneling-Right/Nichiha-ArchitecturalBlock-Modern.jpg?t=1629137943",
+          preview: false,
+          imageableId: 7,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://lh6.googleusercontent.com/uZzBs5sizQir4K_a4XAIyeFub1YpVIccYV0UVyLsC4nVJZxocPoI5Ry-OsuKdOKrSOl4tHX8wBwI4_cn5PQ2Llc55LJUnXoHgYgeJ_RftVg8M3PBB5BEgjxfcJxvGXkRBSOA1rI",
+          preview: true,
+          imageableId: 7,
           imageableType: "Spot",
         },
         {
