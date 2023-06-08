@@ -55,7 +55,7 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://cdn.decoist.com/wp-content/uploads/2021/06/Modular-black-house-with-balcony-49706.jpg",
+          url: "https://jewkesdesign.com/wp-content/uploads/2023/04/Jewkes-Design_Black-Modern-House_04.jpg",
           preview: true,
           imageableId: 4,
           imageableType: "Spot",

@@ -50,6 +50,7 @@
   border: 2px solid black;
   box-sizing: border-box;
   resize: vertical;
+  margin-bottom: 10px;
 }
 
 .input-price-container {
