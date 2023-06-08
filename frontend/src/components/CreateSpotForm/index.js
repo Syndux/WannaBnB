@@ -104,7 +104,7 @@ function CreateSpotForm() {
         ],
       };
       
-      console.log(formData);
+      // console.log(formData);
       const res = await dispatch(createSpot(formData));
       const spotId = res.id;
       history.push(`/spots/${spotId}`);
