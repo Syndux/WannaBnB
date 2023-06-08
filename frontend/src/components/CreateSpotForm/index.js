@@ -93,7 +93,15 @@ function CreateSpotForm() {
         description,
         name,
         price,
+        images: [
+          { url: previewImage, preview: true },
+          ...(image1 ? [{ url: image1, preview: false }] : []),
+          ...(image2 ? [{ url: image2, preview: false }] : []),
+          ...(image3 ? [{ url: image3, preview: false }] : []),
+          ...(image4 ? [{ url: image4, preview: false }] : []),
+        ],
       };
+      
       console.log(formData);
 
       dispatch(createSpot(formData));
@@ -252,7 +260,7 @@ function CreateSpotForm() {
         </div>
         <div className="spot-create-section">
           <div className="input-price-container">
-            ${" "}
+            $
             <input
               type="text"
               id="price"
