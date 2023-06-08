@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { createSpot } from "../../store/spots";
 
 import "./CreateSpotForm.css";
 
 function CreateSpotForm() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
@@ -29,7 +31,7 @@ function CreateSpotForm() {
     return validExtensions.includes(extension);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const errors = {};
@@ -103,8 +105,9 @@ function CreateSpotForm() {
       };
       
       console.log(formData);
-
-      dispatch(createSpot(formData));
+      const res = await dispatch(createSpot(formData));
+      const spotId = res.id;
+      history.push(`/spots/${spotId}`);
     }
   };
 
