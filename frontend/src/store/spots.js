@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 // Action Types
 const LOAD = "spots/LOAD";
+const LOAD_SINGLE = "spots/LOAD_SINGLE";
 const ADD_SPOT = "spots/ADD_SPOT";
 const ADD_IMAGE = "spots/ADD_IMAGE";
 
@@ -11,6 +12,11 @@ const load = (spots) => ({
   spots,
 });
 
+const loadSingle = (spot) => ({
+  type: LOAD_SINGLE,
+  spot,
+});
+
 const addSpot = (spot) => ({
   type: ADD_SPOT,
   spot,
@@ -18,7 +24,7 @@ const addSpot = (spot) => ({
 
 const addImage = (spotId, image) => ({
   type: ADD_IMAGE,
-  payload: { spotId, image }
+  payload: { spotId, image },
 });
 
 // Thunk Action Creators
@@ -29,6 +35,15 @@ export const loadSpots = () => async (dispatch) => {
     const data = await response.json();
     dispatch(load(data));
     return data;
+  }
+};
+
+export const getSpotDetails = (spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`);
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(loadSingle(data));
   }
 };
 
@@ -59,17 +74,16 @@ export const createSpot = (formData) => async (dispatch) => {
         dispatch(addImage(spotId, addedImage));
       }
     }
-    return spot;
+    return spotId;
   }
 };
 
 // Initial state
-const initialState = {
-  spots: null,
-};
+const initialState = {};
 
 // Reducer
 const spotsReducer = (state = initialState, action) => {
+  let newState = { ...state };
   switch (action.type) {
     case LOAD:
       const spotsMap = {};
@@ -78,33 +92,30 @@ const spotsReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        spots: spotsMap,
+        ...spotsMap,
       };
+    case LOAD_SINGLE:
+      newState[action.spot.id] = action.spot;
+      return newState;
     case ADD_SPOT:
       const newSpot = action.spot;
       return {
         ...state,
-        spots: {
-          ...state.spots,
-          [newSpot.id]: newSpot,
+        [newSpot.id]: newSpot,
+      };
+    case ADD_IMAGE:
+      const { spotId, image } = action.payload;
+      const spot = state[spotId];
+      const images = spot.images || [];
+
+      return {
+        ...state,
+        [spotId]: {
+          ...spot,
+          images: [...images, image],
         },
       };
-      case ADD_IMAGE:
-        const { spotId, image } = action.payload;
-        const spot = state.spots[spotId];
-        const images = spot.images || [];
-      
-        return {
-          ...state,
-          spots: {
-            ...state.spots,
-            [spotId]: {
-              ...spot,
-              images: [...images, image], 
-            },
-          },
-        };
-      
+
     default:
       return state;
   }

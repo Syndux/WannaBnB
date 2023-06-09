@@ -105,8 +105,7 @@ function CreateSpotForm() {
       };
       
       // console.log(formData);
-      const res = await dispatch(createSpot(formData));
-      const spotId = res.id;
+      const spotId = await dispatch(createSpot(formData));
       history.push(`/spots/${spotId}`);
     }
   };
