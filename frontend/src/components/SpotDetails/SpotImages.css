@@ -1,13 +1,3 @@
-.spot-images {
-  margin: 15px 0px;
-  display: grid;
-  grid-gap: 4px;
-  grid-template-areas:
-    "photoOne photoTwo photoThree"
-    "photoOne photoFour PhotoFive";
-  grid-template-columns: 50% 25% 25%;
-}
-
 /* .spot-images > div {
   border: 2px solid black;
 } */
@@ -20,12 +10,12 @@
 
 .spot-images > div:first-child {
   grid-area: photoOne;
-  height: 400px;
+  height: 450px;
 }
 
 .spot-images > div:nth-child(2),
 .spot-images > div:nth-child(3),
 .spot-images > div:nth-child(4),
 .spot-images > div:nth-child(5) {
-  height: calc(202px - 0.25em);
+  height: calc(227px - 0.25em);
 }
