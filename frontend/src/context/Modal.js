@@ -1,40 +1,37 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useRef, useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import './Modal.css';
 
-// Create the ModalContext
 const ModalContext = createContext();
 
-// Custom hook to access the modal context
-export function useModal() {
-  return useContext(ModalContext);
-}
-
-// ModalProvider component to wrap the application and provide modal functionality
 export function ModalProvider({ children }) {
-  const [modalContent, setModalContent] = useState(null);
-  const [onModalClose, setOnModalClose] = useState(null);
-
-  const closeModal = () => {
-    setModalContent(null);
-    if (onModalClose) {
-      onModalClose();
-      setOnModalClose(null);
-    }
-  };
-
-  const modalContextValue = {
-    setModalContent,
-    setOnModalClose,
-    closeModal,
-  };
+  const modalRef = useRef();
+  const [value, setValue] = useState();
+  
+  useEffect(() => {
+    setValue(modalRef.current);
+  }, [])
 
   return (
-    <ModalContext.Provider value={modalContextValue}>
-      {children}
-      {modalContent && (
-        <div className="modal">
-          <div className="modal-content">{modalContent}</div>
-        </div>
-      )}
-    </ModalContext.Provider>
+    <>
+      <ModalContext.Provider value={value}>
+        {children}
+      </ModalContext.Provider>
+      <div ref={modalRef} />
+    </>
+  );
+}
+
+export function Modal({ onClose, children }) {
+  const modalNode = useContext(ModalContext);
+  if (!modalNode) return null;
+  return ReactDOM.createPortal(
+    <div id="modal">
+      <div id="modal-background" onClick={onClose} />
+      <div id="modal-content">
+        {children}
+      </div>
+    </div>,
+    modalNode
   );
 }

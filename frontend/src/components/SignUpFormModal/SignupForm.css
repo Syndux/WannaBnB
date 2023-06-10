@@ -2,48 +2,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin: 0px 20px 20px;
 }
 
-h1 {
+.signup-container h1 {
   font-size: 26px;
-  margin-bottom: 20px;
 }
 
-.form-group {
+.signup-form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
 }
 
-label {
-  font-size: 16px;
-  margin-bottom: 4px;
-  margin-left: 2px
+.signup-form-group input[type="text"],
+.signup-form-group input[type="password"] {
+  padding: 8px;
+  font-size: 14px;
+  border: 2px solid black;
+  border-radius: 4px;
 }
 
-input[type="text"],
-input[type="password"] {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid lightgray;
-  border-radius: 5px;
-}
-
-.error-message {
+.signup-error-message {
   color: red;
   font-size: 14px;
   margin-top: 5px;
 }
 
 .signup-button {
-  padding: 8px 15px;
-  font-size: 16px;
+  padding: 10px;
+  font-size: 12px;
   background-color: #0066ff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 400px;
 }
 
 .signup-button:hover {

@@ -2,7 +2,7 @@ import React from 'react';
 import SpotTile from './SpotTile';
 
 const SpotGrid = ({ spots }) => {
-  const spotsArr = Object.values(spots);
+  const spotsArr = Object.values(spots).reverse();
 
   return (
     <div className="spot-grid">

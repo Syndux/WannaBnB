@@ -1,37 +1,36 @@
 import React from "react";
-
-import * as SpotImages from "./SpotImages";
-import SpotDetails from "../SpotDetails";
+import { Link } from "react-router-dom";
 
 const SpotTile = ({ spot }) => {
-  const imageSource = SpotImages[`spotImg${spot.id}Prev`];
+  const spotId = spot.id;
 
   return (
     <div className="spot-tile">
-      <div className="spot-thumbnail">
-        <img
-          src={imageSource}
-          alt="Spot Preview"
-          className="spot-image"
-          title={spot.name}
-        />
-        <SpotDetails />
-      </div>
-      <div className="spot-details">
-        <div className="spot-location-rating">
-          <div className="spot-city-state">{`${spot.city}, ${spot.state}`}</div>
-          <span>
-            <i className="fa-solid fa-star spot-rating" />
-            {spot.avgRating !== null
-              ? spot.avgRating.toFixed(Number.isInteger(spot.avgRating) ? 1 : 2)
-              : "New"}
-          </span>
+      <Link to={`/spots/${spotId}`} style={{"textDecoration" : "none", "color" : "black"}}>
+        <div className="spot-thumbnail">
+          <img
+            src={spot.previewImage}
+            alt="Spot Preview"
+            className="spot-image"
+            title={spot.name}
+          />
         </div>
-        <div className="spot-price">
-          <span className="spot-price-value">${spot.price} </span>
-          <span>night</span>
+        <div className="spot-details">
+          <div className="spot-location-rating">
+            <div className="spot-city-state">{`${spot.city}, ${spot.state}`}</div>
+            <span>
+              <i className="fa-solid fa-star spot-rating" />
+              {spot.avgRating
+                ? spot.avgRating.toFixed(Number.isInteger(spot.avgRating) ? 1 : 2)
+                : "New"}
+            </span>
+          </div>
+          <div className="spot-price">
+            <span className="spot-price-value">${spot.price} </span>
+            <span>night</span>
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

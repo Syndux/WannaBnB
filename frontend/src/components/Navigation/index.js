@@ -1,13 +1,13 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import ProfileButton from './ProfileButton';
-import './Navigation.css';
-import airbnbLogo from './airbnb_logo.png';
+import ProfileButton from "./ProfileButton";
+import airbnbLogo from "./airbnb_logo.png";
+import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
-  const sessionUser = useSelector(state => state.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
 
   return (
     <div className="navbar">
@@ -16,7 +16,14 @@ function Navigation({ isLoaded }) {
       </NavLink>
 
       {isLoaded && (
-        <ProfileButton user={sessionUser} />
+        <>
+          {sessionUser && (
+            <NavLink to="/spots/new" className="new-spot-link">
+              Create a New Spot
+            </NavLink>
+          )}
+          <ProfileButton user={sessionUser} />
+        </>
       )}
     </div>
   );
