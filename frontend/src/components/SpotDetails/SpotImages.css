@@ -1,4 +1,4 @@
-.spot-images {
+/* .spot-images {
   margin: 15px 0px;
   display: grid;
   grid-gap: 4px;
@@ -6,10 +6,8 @@
     "photoOne photoTwo photoThree"
     "photoOne photoFour PhotoFive";
   grid-template-columns: 2fr 1fr 1fr;
-  overflow: hidden;
-  height: calc(var(--container-height) * 0.6);
   width: 100%;
-}
+} */
 
 .spot-images img {
   width: 100%;
@@ -19,8 +17,4 @@
 
 .spot-images > div:first-child {
   grid-area: photoOne;
-}
-
-.spot-images > div:nth-child(n+2) {
-  height: calc(var(--container-height) * 0.5 - 2px);
 }

@@ -12,7 +12,7 @@
   font-size: 18px;
 }
 
-/* .spot-images {
+.spot-images {
   margin: 15px 0px;
   display: grid;
   grid-gap: 4px;
@@ -20,9 +20,8 @@
     "photoOne photoTwo photoThree"
     "photoOne photoFour PhotoFive";
   grid-template-columns: 2fr 1fr 1fr;
-  overflow: clip;
-  height: 450px;
-} */
+  width: 100%;
+}
 
 .hosted-by {
   font-size: 24px;

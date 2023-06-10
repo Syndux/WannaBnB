@@ -5,7 +5,7 @@ const SpotDesc = ({ spot }) => {
         Hosted by {spot.Owner.firstName} {spot.Owner.lastName}
       </div>
       <div className="spot-desc">
-        
+        {spot.description}
       </div>
     </div>
   );
