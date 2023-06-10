@@ -39,29 +39,31 @@
 
 .profile-dropdown {
   position: absolute;
-  top: 60%;
+  top: 120%;
   right: 0;
   background-color: #FFFFFF;
   border: 2px solid #000000;
-  padding: 5px;
-  list-style: none;
   white-space: nowrap;
+  list-style: none;
+  padding: 0px;
 }
 
 .profile-dropdown.hidden {
   display: none;
 }
 
-.profile-dropdown li , .profile-dropdown p{
-  margin: 4px 50px 4px 10px;
+.profile-dropdown-menu {
+  margin: 0px 10px;
 }
 
-.profile-dropdown li {
-  cursor: pointer;
+.profile-dropdown-divider {
+  margin: 2px;
+  border-bottom: 1px solid #000000;
 }
 
 .profile-dropdown button {
-  background: none;
+  background-color: #999999;
   border: none;
   cursor: pointer;
+  color: white;
 }

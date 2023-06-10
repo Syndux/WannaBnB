@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 
 import * as sessionActions from "../../store/session";
 import LoginFormModal from "../LoginFormModal";
@@ -9,6 +10,7 @@ function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const history = useHistory();
 
   const openMenu = () => {
     if (showMenu) return;
@@ -35,6 +37,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    history.push("/");
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -47,18 +50,28 @@ function ProfileButton({ user }) {
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
-            <p>Hello, {user.username}</p>
-            <p>{user.email}</p>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
-          </>
+          <div className="profile-dropdown-menu">
+            <li className="profile-username">Hello, {user.username}</li>
+            <li className="profile-email">{user.email}</li>
+
+            <li className="profile-dropdown-divider" />
+            <Link to="/spots/owned" className="manage-spot-link">
+              Manage Spots
+            </Link>
+
+            <Link to="/reviews/current" className="manage-review-link">
+              Manage Reviews
+            </Link>
+            <li className="profile-dropdown-divider" />
+
+
+            <button onClick={logout}>Log Out</button>
+          </div>
         ) : (
-          <>
-            <SignUpFormModal onClick={closeMenu}/>
-            <LoginFormModal onClick={closeMenu}/>
-          </>
+          <div className="profile-dropdown-menu">
+            <SignUpFormModal onClick={closeMenu} />
+            <LoginFormModal onClick={closeMenu} />
+          </div>
         )}
       </ul>
     </div>
