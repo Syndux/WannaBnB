@@ -30,7 +30,7 @@ const SpotDetails = () => {
         
         <SpotImages spot={spot} />
 
-        <div className="spot-details-desc">
+        <div className="spot-desc-reserve-container">
           <SpotDesc spot={spot} />
           <SpotReserve spot={spot} />
         </div>
@@ -44,14 +44,12 @@ const SpotDetails = () => {
   
   export default SpotDetails;
   
-  {/* <div className="hosted-by">
-    Hosted by {spot.Owner.firstName} {spot.Owner.lastName}
-  </div>
-  <div className="spot-description">{spot.description}</div>
-  <div className="spot-price">
-    <span className="spot-price-value">${spot.price}</span>
-    <span>night</span>
-  </div>
-  <button className="reserve-button" onClick={reserveSpot}>
-    Reserve
-  </button> */}
+
+  // <div className="spot-description">{spot.description}</div>
+  // <div className="spot-price">
+  //   <span className="spot-price-value">${spot.price}</span>
+  //   <span>night</span>
+  // </div>
+  // <button className="reserve-button" onClick={reserveSpot}>
+  //   Reserve
+  // </button>

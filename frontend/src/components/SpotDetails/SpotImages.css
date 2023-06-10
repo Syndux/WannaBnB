@@ -1,6 +1,15 @@
-/* .spot-images > div {
-  border: 2px solid black;
-} */
+.spot-images {
+  margin: 15px 0px;
+  display: grid;
+  grid-gap: 4px;
+  grid-template-areas:
+    "photoOne photoTwo photoThree"
+    "photoOne photoFour PhotoFive";
+  grid-template-columns: 2fr 1fr 1fr;
+  overflow: hidden;
+  height: calc(var(--container-height) * 0.6);
+  width: 100%;
+}
 
 .spot-images img {
   width: 100%;
@@ -10,12 +19,8 @@
 
 .spot-images > div:first-child {
   grid-area: photoOne;
-  height: 450px;
 }
 
-.spot-images > div:nth-child(2),
-.spot-images > div:nth-child(3),
-.spot-images > div:nth-child(4),
-.spot-images > div:nth-child(5) {
-  height: calc(227px - 0.25em);
+.spot-images > div:nth-child(n+2) {
+  height: calc(var(--container-height) * 0.5 - 2px);
 }
