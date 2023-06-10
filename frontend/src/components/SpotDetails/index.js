@@ -22,7 +22,7 @@ const SpotDetails = () => {
     alert("Feature coming soon");
   };
 
-  return (
+  return ( spot && 
     spot.Owner && (
       <div className="spot-details-container">
         <div className="spot-name">{spot.name}</div>
