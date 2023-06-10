@@ -1,3 +1,27 @@
 .spot-details-container {
   margin: 10px 40px;
 }
+
+.spot-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0px;
+}
+
+.spot-location {
+  font-size: 18px;
+}
+
+.spot-images {
+  margin: 15px 0px;
+  display: grid;
+  grid-gap: 4px;
+  grid-template-areas:
+    "photoOne photoTwo photoThree"
+    "photoOne photoFour PhotoFive";
+  grid-template-columns: 50% 25% 25%;
+}
+
+.hosted-by {
+  font-size: 24px;
+}

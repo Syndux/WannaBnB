@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 
 import { getSpotDetails } from "../../store/spots";
 import SpotImages from "./SpotImages";
+import SpotDesc from "./SpotDesc";
+import SpotReserve from "./SpotReserve";
 import "./SpotDetails.css";
 
 const SpotDetails = () => {
@@ -21,27 +23,35 @@ const SpotDetails = () => {
   };
 
   return (
-    spot && (
+    spot.Owner && (
       <div className="spot-details-container">
         <div className="spot-name">{spot.name}</div>
         <div className="spot-location">{`${spot.city}, ${spot.state}, ${spot.country}`}</div>
         
         <SpotImages spot={spot} />
 
-        {/* <div className="hosted-by">
-          Hosted by {spot.Owner.firstName} {spot.Owner.lastName}
+        <div className="spot-details-desc">
+          <SpotDesc spot={spot} />
+          <SpotReserve spot={spot} />
         </div>
-        <div className="spot-description">{spot.description}</div>
-        <div className="spot-price">
-          <span className="spot-price-value">${spot.price}</span>
-          <span>night</span>
+        <div className="spot-reviews">
+
         </div>
-        <button className="reserve-button" onClick={reserveSpot}>
-          Reserve
-        </button> */}
       </div>
     )
-  );
-};
-
-export default SpotDetails;
+    );
+  };
+  
+  export default SpotDetails;
+  
+  {/* <div className="hosted-by">
+    Hosted by {spot.Owner.firstName} {spot.Owner.lastName}
+  </div>
+  <div className="spot-description">{spot.description}</div>
+  <div className="spot-price">
+    <span className="spot-price-value">${spot.price}</span>
+    <span>night</span>
+  </div>
+  <button className="reserve-button" onClick={reserveSpot}>
+    Reserve
+  </button> */}
