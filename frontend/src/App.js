@@ -5,7 +5,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
 import CreateSpotForm from "./components/CreateSpotForm";
+import OwnedSpots from "./components/OwnedSpots";
 import SpotDetails from "./components/SpotDetails";
+import OwnedReviews from "./components/OwnedReviews";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,8 +29,14 @@ function App() {
           <Route path="/spots/new">
             <CreateSpotForm />
           </Route>
+          <Route path="/spots/owned">
+            <OwnedSpots />
+          </Route>
           <Route path="/spots/:id">
             <SpotDetails />
+          </Route>
+          <Route path="/reviews/current">
+            <OwnedReviews />
           </Route>
         </Switch>
       )}
