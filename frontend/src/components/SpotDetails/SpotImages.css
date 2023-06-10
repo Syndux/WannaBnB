@@ -1,23 +1,31 @@
 .spot-images {
   margin: 15px 0px;
   display: grid;
-  grid-gap: .5em;
+  grid-gap: 4px;
   grid-template-areas:
     "photoOne photoTwo photoThree"
     "photoOne photoFour PhotoFive";
   grid-template-columns: 50% 25% 25%;
 }
 
-.spot-images > div {
+/* .spot-images > div {
   border: 2px solid black;
-}
+} */
 
 .spot-images img {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .spot-images > div:first-child {
   grid-area: photoOne;
+  height: 400px;
 }
 
+.spot-images > div:nth-child(2),
+.spot-images > div:nth-child(3),
+.spot-images > div:nth-child(4),
+.spot-images > div:nth-child(5) {
+  height: calc(202px - 0.25em);
+}
