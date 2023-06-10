@@ -25,7 +25,25 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://images.squarespace-cdn.com/content/v1/5c3c4ca8365f02e708cc7c8c/1627798150395-EANP0XZ7QNGZBNJABZ4N/Tampines%2B4-Room%2BHDB%2BBTO%2BBedroom%2B1.jpeg?format=1500w",
+          url: "https://www.windermere.com/files/2022/06/Contemporary-2.jpg",
+          preview: false,
+          imageableId: 1,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://www.decorilla.com/online-decorating/wp-content/uploads/2022/07/Contemporary-interior-design-and-decor-Urbanology-Designs.jpg",
+          preview: false,
+          imageableId: 1,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://mir-s3-cdn-cf.behance.net/project_modules/max_3840/4442cb44672379.581a21d3dd3df.jpg",
+          preview: false,
+          imageableId: 1,
+          imageableType: "Spot",
+        },
+        {
+          url: "https://hommes.studio/wp-content/uploads/5-etheral-projects-by-remarkable-international-interior-designers-1.png",
           preview: false,
           imageableId: 2,
           imageableType: "Spot",
@@ -85,13 +103,13 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://www.nichiha.com/uploads/7-Modern-Homes-Using-Wall-Paneling-Right/Nichiha-ArchitecturalBlock-Modern.jpg?t=1629137943",
+          url: "https://design-authority.com/wp-content/uploads/2021/09/Modern-Luxury-Interior-Design-by-Fusion-Design-Limited.jpg",
           preview: false,
           imageableId: 7,
           imageableType: "Spot",
         },
         {
-          url: "https://lh6.googleusercontent.com/uZzBs5sizQir4K_a4XAIyeFub1YpVIccYV0UVyLsC4nVJZxocPoI5Ry-OsuKdOKrSOl4tHX8wBwI4_cn5PQ2Llc55LJUnXoHgYgeJ_RftVg8M3PBB5BEgjxfcJxvGXkRBSOA1rI",
+          url: "https://www.home-designing.com/wp-content/uploads/2017/05/three-level-exterior-house-ideas.jpg",
           preview: true,
           imageableId: 7,
           imageableType: "Spot",
