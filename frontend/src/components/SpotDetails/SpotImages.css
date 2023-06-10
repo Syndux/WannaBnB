@@ -1,0 +1,23 @@
+.spot-images {
+  margin: 15px 0px;
+  display: grid;
+  grid-gap: .5em;
+  grid-template-areas:
+    "photoOne photoTwo photoThree"
+    "photoOne photoFour PhotoFive";
+  grid-template-columns: 50% 25% 25%;
+}
+
+.spot-images > div {
+  border: 2px solid black;
+}
+
+.spot-images img {
+  max-width: 100%;
+  height: auto;
+}
+
+.spot-images > div:first-child {
+  grid-area: photoOne;
+}
+
