@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -11,16 +11,19 @@ import "./SpotDetails.css";
 const SpotDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const spot = useSelector((state) => state.spots[id]);
 
   useEffect(() => {
-    dispatch(getSpotDetails(id));
+    (async () => {
+      await dispatch(getSpotDetails(id));
+      setIsLoaded(true);
+    })();
   }, [dispatch, id]);
 
   return (
-    spot &&
-    spot.Owner && (
+    isLoaded && (
       <div className="spot-details-container">
         <div className="spot-name">{spot.name}</div>
         <div className="spot-location">{`${spot.city}, ${spot.state}, ${spot.country}`}</div>
@@ -38,11 +41,3 @@ const SpotDetails = () => {
 };
 
 export default SpotDetails;
-
-// <div className="spot-price">
-//   <span className="spot-price-value">${spot.price}</span>
-//   <span>night</span>
-// </div>
-// <button className="reserve-button" onClick={reserveSpot}>
-//   Reserve
-// </button>
