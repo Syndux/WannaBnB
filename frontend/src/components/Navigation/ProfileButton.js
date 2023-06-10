@@ -54,23 +54,33 @@ function ProfileButton({ user }) {
             <li className="profile-username">Hello, {user.username}</li>
             <li className="profile-email">{user.email}</li>
 
-            <li className="profile-dropdown-divider" />
-            <Link to="/spots/owned" className="manage-spot-link">
-              Manage Spots
-            </Link>
+            <p className="profile-dropdown-divider" />
+            <li>
+              <Link to="/spots/owned" className="manage-link">
+                Manage Spots
+              </Link>
+            </li>
+            <li>
+              <Link to="/reviews/current" className="manage-link">
+                Manage Reviews
+              </Link>
+            </li>
+            <p className="profile-dropdown-divider" />
 
-            <Link to="/reviews/current" className="manage-review-link">
-              Manage Reviews
-            </Link>
-            <li className="profile-dropdown-divider" />
-
-
-            <button onClick={logout}>Log Out</button>
+            <div className="profile-dropdown-button-container">
+              <button className="logout-button" onClick={logout}>
+                Log Out
+              </button>
+            </div>
           </div>
         ) : (
           <div className="profile-dropdown-menu">
-            <SignUpFormModal onClick={closeMenu} />
-            <LoginFormModal onClick={closeMenu} />
+            <li>
+              <SignUpFormModal onClick={closeMenu} />
+            </li>
+            <li>
+              <LoginFormModal onClick={closeMenu} />
+            </li>
           </div>
         )}
       </ul>
