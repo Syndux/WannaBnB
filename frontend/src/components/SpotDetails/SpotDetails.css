@@ -5,15 +5,15 @@
 .spot-name {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 20px;
 }
 
 .spot-location {
   font-size: 18px;
+  margin-top: 20px;
 }
 
 .spot-images {
-  margin: 15px 0px;
+  margin-top: 20px;
   display: grid;
   grid-gap: 4px;
   grid-template-areas:
@@ -25,4 +25,9 @@
 
 .hosted-by {
   font-size: 24px;
+  margin-top: 20px;
+}
+
+.spot-desc {
+  margin-top: 10px;
 }
