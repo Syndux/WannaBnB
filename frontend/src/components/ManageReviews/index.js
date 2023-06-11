@@ -1,3 +1,5 @@
+import "./ManageReviews.css"
+
 const ManageReviews = () => {
   return (
     <div>
