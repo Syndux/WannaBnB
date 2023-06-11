@@ -48,3 +48,18 @@
 .spot-price-value {
   font-weight: bold;
 }
+
+/* Manage Spots */
+.spot-tile-manage-container {
+  padding-top: 20px;
+}
+
+.spot-tile-manage-container > button {
+  background-color: #999999;
+  border: 2px solid #000000;
+  border-radius: 3spx;
+  cursor: pointer;
+  color: white;
+  padding: 2px 6px;
+  margin-right: 10px;
+}
