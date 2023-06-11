@@ -1,21 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import SpotGrid from "../LandingPage/SpotGrid";
 import { loadCurrentSpots } from "../../store/spots";
-import "./OwnedSpots.css";
+import "./ManageSpots.css";
 
-const OwnedSpots = () => {
+const ManageSpots = () => {
   const dispatch = useDispatch();
   const spots = useSelector(state => state.spots);
+  const [isRendered, setIsRendered] = useState(false);
 
   useEffect(() => {
-    dispatch(loadCurrentSpots());
+    (async () => {
+      await dispatch(loadCurrentSpots());
+      setIsRendered(true);
+    })();
   }, [dispatch]);
 
-  return spots && (
+  return isRendered && (
     <SpotGrid spots={spots} />
   )
 };
 
-export default OwnedSpots;
+export default ManageSpots;
