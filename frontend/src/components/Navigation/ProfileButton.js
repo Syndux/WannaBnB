@@ -56,12 +56,12 @@ function ProfileButton({ user }) {
 
             <p className="profile-dropdown-divider" />
             <li>
-              <Link to="/spots/owned" className="manage-link">
+              <Link to="/spots/owned" className="manage-link" onClick={closeMenu}>
                 Manage Spots
               </Link>
             </li>
             <li>
-              <Link to="/reviews/current" className="manage-link">
+              <Link to="/reviews/current" className="manage-link" onClick={closeMenu}>
                 Manage Reviews
               </Link>
             </li>
