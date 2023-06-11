@@ -1,0 +1,20 @@
+.manage-spots-container {
+  margin: 15px auto;
+  padding: 0px 20px;
+  max-width: 1300px;
+}
+
+.manage-spots-container > h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 2px 0px;
+}
+
+.manage-spots-create-spot-button {
+  background-color: #999999;
+  border: 2px solid #000000;
+  border-radius: 2px;
+  cursor: pointer;
+  color: white;
+  padding: 2px 6px;
+}
