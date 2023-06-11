@@ -6,7 +6,6 @@ const SpotTile = ({ spot }) => {
 
   return (
     <div className="spot-tile">
-      <Link to={`/spots/${spotId}`} style={{"textDecoration" : "none", "color" : "black"}}>
         <div className="spot-thumbnail">
           <img
             src={spot.previewImage}
@@ -30,7 +29,6 @@ const SpotTile = ({ spot }) => {
             <span>night</span>
           </div>
         </div>
-      </Link>
     </div>
   );
 };

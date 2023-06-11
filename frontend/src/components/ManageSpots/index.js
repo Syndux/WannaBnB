@@ -26,7 +26,7 @@ const ManageSpots = () => {
           <button className="manage-spots-create-spot-button">Create a New Spot</button>
         </NavLink>
       </div>
-      <SpotGrid spots={spots} />
+      <SpotGrid spots={spots} manage={true} />
     </>
   )
 };
