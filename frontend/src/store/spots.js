@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 // Action Types
-const LOAD = "spots/LOAD";
+const LOAD = "spots/LOAD_ALL";
 const LOAD_SINGLE = "spots/LOAD_SINGLE";
 const ADD_SPOT = "spots/ADD_SPOT";
 const ADD_IMAGE = "spots/ADD_IMAGE";
@@ -28,13 +28,22 @@ const addImage = (spotId, image) => ({
 });
 
 // Thunk Action Creators
-export const loadSpots = () => async (dispatch) => {
+export const loadAllSpots = () => async (dispatch) => {
   const response = await csrfFetch("/api/spots");
 
   if (response.ok) {
-    const data = await response.json();
-    dispatch(load(data));
-    return data;
+    const spots = await response.json();
+    dispatch(load(spots));
+    return spots;
+  }
+};
+
+export const loadCurrentSpots = () => async (dispatch) => {
+  const response = await csrfFetch("/api/spots/owned");
+
+  if (response.ok) {
+    const spots = await response.json();
+    dispatch(load(spots));
   }
 };
 
@@ -42,10 +51,11 @@ export const getSpotDetails = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`);
 
   if (response.ok) {
-    const data = await response.json();
-    dispatch(loadSingle(data));
+    const spot = await response.json();
+    dispatch(loadSingle(spot));
   }
 };
+
 
 export const createSpot = (formData) => async (dispatch) => {
   const response = await csrfFetch("/api/spots", {
@@ -86,23 +96,16 @@ const spotsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD:
-      const spotsMap = {};
       action.spots.Spots.forEach((spot) => {
-        spotsMap[spot.id] = spot;
+        newState[spot.id] = spot;
       });
-      return {
-        ...state,
-        ...spotsMap,
-      };
+      return newState;
     case LOAD_SINGLE:
       newState[action.spot.id] = action.spot;
       return newState;
     case ADD_SPOT:
-      const newSpot = action.spot;
-      return {
-        ...state,
-        [newSpot.id]: newSpot,
-      };
+      newState[action.spot.id] = action.spot;
+      return newState;
     case ADD_IMAGE:
       const { spotId, image } = action.payload;
       const spot = state[spotId];
@@ -112,10 +115,9 @@ const spotsReducer = (state = initialState, action) => {
         ...state,
         [spotId]: {
           ...spot,
-          images: [...images, image],
+          SpotImages: [...images, image],
         },
       };
-
     default:
       return state;
   }
