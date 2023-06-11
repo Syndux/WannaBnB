@@ -1,9 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const SpotTile = ({ spot }) => {
-  const spotId = spot.id;
-
   return (
     <div className="spot-tile">
         <div className="spot-thumbnail">
