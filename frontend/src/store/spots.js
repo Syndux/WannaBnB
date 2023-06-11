@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 // Action Types
-const LOAD = "spots/LOAD_ALL";
+const LOAD = "spots/LOAD";
 const LOAD_SINGLE = "spots/LOAD_SINGLE";
 const ADD_SPOT = "spots/ADD_SPOT";
 const ADD_IMAGE = "spots/ADD_IMAGE";
@@ -96,10 +96,11 @@ const spotsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case LOAD:
+      const spotsMap = {};
       action.spots.Spots.forEach((spot) => {
-        newState[spot.id] = spot;
+        spotsMap[spot.id] = spot;
       });
-      return newState;
+      return spotsMap;
     case LOAD_SINGLE:
       newState[action.spot.id] = action.spot;
       return newState;
