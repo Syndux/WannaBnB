@@ -1,14 +1,14 @@
 import { csrfFetch } from "./csrf";
 
 // Action Types
-const LOAD_ALL = "spots/LOAD_ALL";
+const LOAD = "spots/LOAD_ALL";
 const LOAD_SINGLE = "spots/LOAD_SINGLE";
 const ADD_SPOT = "spots/ADD_SPOT";
 const ADD_IMAGE = "spots/ADD_IMAGE";
 
 // Action Creators
-const loadAll = (spots) => ({
-  type: LOAD_ALL,
+const load = (spots) => ({
+  type: LOAD,
   spots,
 });
 
@@ -33,8 +33,17 @@ export const loadAllSpots = () => async (dispatch) => {
 
   if (response.ok) {
     const spots = await response.json();
-    dispatch(loadAll(spots));
+    dispatch(load(spots));
     return spots;
+  }
+};
+
+export const loadCurrentSpots = () => async (dispatch) => {
+  const response = await csrfFetch("/api/spots/owned");
+
+  if (response.ok) {
+    const spots = await response.json();
+    dispatch(load(spots));
   }
 };
 
@@ -46,6 +55,7 @@ export const getSpotDetails = (spotId) => async (dispatch) => {
     dispatch(loadSingle(spot));
   }
 };
+
 
 export const createSpot = (formData) => async (dispatch) => {
   const response = await csrfFetch("/api/spots", {
@@ -85,7 +95,7 @@ const initialState = {};
 const spotsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
-    case LOAD_ALL:
+    case LOAD:
       action.spots.Spots.forEach((spot) => {
         newState[spot.id] = spot;
       });
