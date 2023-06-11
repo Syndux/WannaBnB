@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import SpotGrid from './SpotGrid';
-import { loadSpots } from "../../store/spots";
+import { loadAllSpots } from "../../store/spots";
 import './LandingPage.css';
 
 const LandingPage = () => {
@@ -10,7 +10,7 @@ const LandingPage = () => {
   const spots = useSelector(state => state.spots);
 
   useEffect(() => {
-    dispatch(loadSpots());
+    dispatch(loadAllSpots());
   }, [dispatch]);
   
   return (
