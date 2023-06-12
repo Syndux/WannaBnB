@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
-import CreateSpotForm from "./components/CreateSpotForm";
+import SpotForm from "./components/SpotForm";
 import ManageSpots from "./components/ManageSpots";
 import SpotDetails from "./components/SpotDetails";
 import ManageReviews from "./components/ManageReviews";
@@ -27,13 +27,13 @@ function App() {
             <LandingPage />
           </Route>
           <Route path="/spots/new">
-            <CreateSpotForm />
+            <SpotForm isEdit={false} />
           </Route>
           <Route path="/spots/owned">
             <ManageSpots />
           </Route>
           <Route path="/spots/:id/edit">
-            <CreateSpotForm />
+            <SpotForm isEdit={true} />
           </Route>
           <Route path="/spots/:id">
             <SpotDetails />
