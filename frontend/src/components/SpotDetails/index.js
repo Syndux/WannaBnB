@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { getSpotDetails } from "../../store/spots";
+import { getSpotReviews } from "../../store/reviews";
 import SpotImages from "./SpotImages";
 import SpotDesc from "./SpotDesc";
 import SpotReserve from "./SpotReserve";
@@ -19,10 +20,13 @@ const SpotDetails = () => {
   useEffect(() => {
     (async () => {
       await dispatch(getSpotDetails(id));
+      if(spot && spot.numReviews) {
+        await dispatch(getSpotReviews(id));
+      }
       setIsLoaded(true);
     })();
   }, [dispatch, id]);
-
+  
   return (
     isLoaded && (
       <div className="spot-details-container">

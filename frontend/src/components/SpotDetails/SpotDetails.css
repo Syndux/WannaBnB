@@ -97,3 +97,7 @@
   border-top: 2px solid black;
   padding-top: 10px;
 }
+
+.spot-reviews-avg-rating-container {
+  font-size: 24px;
+}

@@ -13,7 +13,7 @@ const SpotReserve = ({ spot }) => {
           {`$${spot.price}`} <span className="spot-price-unit">night</span>
         </div>
         <div className="spot-avg-rating-container">
-          <i className="fa-solid fa-star" />
+          <i className="fa-sharp fa-solid fa-star" />
           {" "}
           <span className="spot-avg-rating">
             {spot.avgStarRating
