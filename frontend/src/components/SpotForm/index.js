@@ -41,12 +41,15 @@ function SpotForm({ isEdit }) {
       setPrice(spot.price || "");
   
       if (spot.SpotImages) {
-        spot.SpotImages.forEach((image, index) => {
-          if (index === 0) setPreviewImage(image?.url || "");
-          if (index === 1) setImage1(image?.url || "");
-          if (index === 2) setImage2(image?.url || "");
-          if (index === 3) setImage3(image?.url || "");
-          if (index === 4) setImage4(image?.url || "");
+        const previewImage = spot.SpotImages.find((image) => image.preview);
+        const additionalImages = spot.SpotImages.filter((image) => !image.preview);
+        
+        setPreviewImage(previewImage?.url || "");
+        additionalImages.forEach((image, index) => {
+          if (index === 0) setImage1(image?.url || "");
+          if (index === 1) setImage2(image?.url || "");
+          if (index === 2) setImage3(image?.url || "");
+          if (index === 3) setImage4(image?.url || "");
         });
       }
     }
