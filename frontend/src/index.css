@@ -1,3 +1,20 @@
+* {
+  font-family: 'Mulish', sans-serif;
+}
+
 body, html {
   margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.unauthorized {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  font-size: 24px;
 }

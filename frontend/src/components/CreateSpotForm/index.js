@@ -1,28 +1,59 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import { createSpot } from "../../store/spots";
 
+import { loadAllSpots } from "../../store/spots";
 import "./CreateSpotForm.css";
 
 function CreateSpotForm() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
+  const spot = useSelector((state) => state.spots[id]);
+  const sessionUser = useSelector((state) => state.session.user);
+  const [isRendered, setIsRendered] = useState(false);
 
-  const [country, setCountry] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const [description, setDescription] = useState("");
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [previewImage, setPreviewImage] = useState("");
-  const [image1, setImage1] = useState("");
-  const [image2, setImage2] = useState("");
-  const [image3, setImage3] = useState("");
-  const [image4, setImage4] = useState("");
+  useEffect(() => {
+    (async () => {
+      await dispatch(loadAllSpots());
+      setIsRendered(true);
+    })();
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (spot) {
+      setCountry(spot.country || "");
+      setAddress(spot.address || "");
+      setCity(spot.city || "");
+      setState(spot.state || "");
+      setLatitude(spot.lat || "");
+      setLongitude(spot.lng || "");
+      setDescription(spot.description || "");
+      setName(spot.name || "");
+      setPrice(spot.price || "");
+      setPreviewImage(spot.previewImage || "");
+      setImage1(spot.image1 || "");
+      setImage2(spot.image2 || "");
+      setImage3(spot.image3 || "");
+      setImage4(spot.image4 || "");
+    }
+  }, [spot]);
+
+  const [country, setCountry] = useState(spot?.country || "");
+  const [address, setAddress] = useState(spot?.address || "");
+  const [city, setCity] = useState(spot?.city || "");
+  const [state, setState] = useState(spot?.state || "");
+  const [latitude, setLatitude] = useState(spot?.lat || "");
+  const [longitude, setLongitude] = useState(spot?.lng || "");
+  const [description, setDescription] = useState(spot?.description || "");
+  const [name, setName] = useState(spot?.name || "");
+  const [price, setPrice] = useState(spot?.price || "");
+  const [previewImage, setPreviewImage] = useState(spot?.previewImage || "");
+  const [image1, setImage1] = useState(spot?.image1 || "");
+  const [image2, setImage2] = useState(spot?.image2 || "");
+  const [image3, setImage3] = useState(spot?.image3 || "");
+  const [image4, setImage4] = useState(spot?.image4 || "");
   const [formErrors, setFormErrors] = useState({});
 
   const isValidImageURL = (url) => {
@@ -103,12 +134,18 @@ function CreateSpotForm() {
           ...(image4 ? [{ url: image4, preview: false }] : []),
         ],
       };
-      
+
       console.log(formData);
       const spotId = await dispatch(createSpot(formData));
       history.push(`/spots/${spotId}`);
     }
   };
+
+  if (isRendered && spot) {
+    if (spot.ownerId !== sessionUser.id) {
+      return <div className="unauthorized">Not authorized to edit this spot</div>;
+    }
+  }
 
   return (
     <div className="spot-create-container">
@@ -219,7 +256,7 @@ function CreateSpotForm() {
         <div className="spot-create-section">
           <textarea
             id="description"
-            placeholder="Description"
+            placeholder="Please write at least 30 characters"
             rows="6"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -264,7 +301,7 @@ function CreateSpotForm() {
           <div className="input-price-container">
             $
             <input
-              type="text"
+              type="number"
               id="price"
               placeholder="Price per night (USD)"
               value={price}

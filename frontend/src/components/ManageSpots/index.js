@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import SpotGrid from "../LandingPage/SpotGrid";
 import { loadCurrentSpots } from "../../store/spots";
@@ -18,7 +19,15 @@ const ManageSpots = () => {
   }, [dispatch]);
 
   return isRendered && (
-    <SpotGrid spots={spots} />
+    <>
+      <div className="manage-spots-container">
+        <h1>Manage Your Spots</h1>
+        {spots.length && <Link to="/spots/new">
+          <button className="manage-spots-create-spot-button">Create a New Spot</button>
+        </Link>}
+      </div>
+      <SpotGrid spots={spots} manage={true} />
+    </>
   )
 };
 

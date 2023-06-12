@@ -12,9 +12,16 @@
 }
 
 .new-spot-link {
-  color: #00525E;
   margin: 0px 15px 0px auto;
-  text-decoration: none;
+}
+
+.new-spot-link button {
+  border: none;
+  background-color: white;
+  color: #00525E;
+  padding: 0px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 /* Profile Button */
@@ -74,11 +81,6 @@
   color: white;
   cursor: pointer;
   padding: 6px;
-}
-
-.manage-link {
-  text-decoration: none;
-  color: #000000;
 }
 
 .profile-dropdown-divider {
