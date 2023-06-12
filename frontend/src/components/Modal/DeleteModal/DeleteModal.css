@@ -1,0 +1,40 @@
+.confirm-delete-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+  width: 350px;
+}
+
+.confirm-delete-header {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.confirm-delete-description > p {
+  font-size: 18px;
+  margin: 10px 0px;
+}
+
+.confirm-delete {
+  width: 100%;
+}
+
+.confirm-delete > button {
+  color: #FFFFFF;
+  cursor: pointer;
+  justify-content: center;
+  padding: 10px;
+  margin: 5px 0px;
+  width: 100%;
+}
+
+.confirm-delete > button:first-child {
+  background-color: #FF5A5F;
+}
+
+.confirm-delete > button:nth-child(2) {
+  background-color: #999999;
+}

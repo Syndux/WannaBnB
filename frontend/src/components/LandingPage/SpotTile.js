@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Modal } from "../../context/Modal";
-import DeleteSpotModal from "../Modal/DeleteSpotModal";
+import DeleteModal from "../Modal/DeleteModal";
 
 const SpotTile = ({ spot, manage }) => {
   const [showModal, setShowModal] = useState(false);
@@ -48,7 +48,7 @@ const SpotTile = ({ spot, manage }) => {
           </button>
           {showModal && (
             <Modal onClose={() => setShowModal(false)}>
-              <DeleteSpotModal onClose={() => setShowModal(false)} spotId={`${spot.id}`}/>
+              <DeleteModal onClose={() => setShowModal(false)} spotId={`${spot.id}`}/>
             </Modal>
           )}
         </div>
