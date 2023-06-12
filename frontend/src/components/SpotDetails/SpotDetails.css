@@ -41,9 +41,11 @@
 }
 
 .spot-desc {
-  margin-top: 10px;
-  word-break: break-all;
+  margin: 10px 25px 20px 0px;
+  word-break: break-word;
+  word-wrap: break-word;
   overflow-wrap: break-word;
+  white-space: pre-line;
 }
 
 .spot-desc-reserve-container {
