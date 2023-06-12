@@ -23,7 +23,7 @@ const SpotReviews = ({ spot }) => {
         await dispatch(getSpotReviews(spot.id));
       }
     })();
-  }, [dispatch, update, spot]);
+  }, [dispatch, update, spot.id]);
 
   return (
     <div className="spot-reviews-content-container">
@@ -60,6 +60,7 @@ const SpotReviews = ({ spot }) => {
           )}
         </>
       )}
+
       {reviews.length ? (
         <ReviewsList reviews={reviews} />
       ) : (

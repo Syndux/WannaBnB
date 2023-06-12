@@ -100,4 +100,104 @@
 
 .spot-reviews-avg-rating-container {
   font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.spot-reviews-post-button {
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #999999;
+  color: #FFFFFF;
+  border: 2px solid #000000;
+}
+
+/* Create Review Modal */
+.create-review-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.create-review-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.create-review-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-review-error-message {
+  font-size: 12px;
+  color: red;
+}
+
+.create-review-content {
+  width: 250px;
+  resize: none;
+  background-color: #E8F0FE;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.create-review-ratings {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.stars-text {
+  margin-left: 5px;
+}
+
+.create-review-submit {
+  color: #FFFFFF;
+  cursor: pointer;
+  background-color: #FF5A5F;
+  border: 2px solid #000000;
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+  width: 100%;
+}
+
+.disabled {
+  background-color: #FFFFFF;
+  color: #CCCCCC;
+  border: 2px solid #CCCCCC;
+  pointer-events: none;
+}
+
+/* Reviews List */
+.single-review-user {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.single-review-posted-date {
+  font-size: 14px;
+  color: #999999;
+}
+
+.single-review-content {
+  margin: 5px 0px;
+  font-size: 14px;
+}
+
+.single-review-delete {
+  background-color: #999999;
+  border: 2px solid #000000;
+  cursor: pointer;
+  color: white;
+  padding: 2px 6px;
 }
