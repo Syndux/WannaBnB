@@ -3,11 +3,17 @@
   flex-direction: column;
   align-items: center;
   margin: 0px 20px 20px;
+  width: 350px;
 }
 
-.login-container h1 {
-  font-size: 26px;
-  margin-bottom: 5px;
+.login-container > h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0px 15px 0px;
+}
+
+.login-form-container {
+  width: 100%;
 }
 
 .login-form-group {
@@ -39,9 +45,20 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 400px;
+  width: 100%;
 }
 
-.login-button:hover {
-  background-color: #ff5a60e8;
+.disabled {
+  background-color: #FFFFFF;
+  color: #CCCCCC;
+  border: 2px solid #CCCCCC;
+  pointer-events: none;
+}
+
+.login-demo-user-button {
+  margin: 15px 0px 5px 0px;
+  font-size: 18px;
+  color: #00525E;
+  text-decoration: underline;
+  cursor: pointer;
 }

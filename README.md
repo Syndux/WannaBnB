@@ -2,6 +2,10 @@
 A wanna-be AirBnB, WannaBnB, by Huey Nguyen.
 
 ## List of technologies used on the project.
+- JavaScript
+- HTML
+- CSS
+- NodeJS
 - Express
 - Sequelize
 - Postgres

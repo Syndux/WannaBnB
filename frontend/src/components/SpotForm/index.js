@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
-import { loadAllSpots, createSpot, editSpot, getSpotDetails } from "../../store/spots";
+import {
+  loadAllSpots,
+  createSpot,
+  editSpot,
+  getSpotDetails,
+} from "../../store/spots";
 import "./SpotForm.css";
 
 function SpotForm({ isEdit }) {
@@ -24,11 +29,11 @@ function SpotForm({ isEdit }) {
     const fetchSpotDetails = async (id) => {
       await dispatch(getSpotDetails(id));
     };
-  
+
     if (isEdit && spot && !spot.SpotImages) {
       fetchSpotDetails(id);
     }
-  
+
     if (spot) {
       setCountry(spot.country || "");
       setAddress(spot.address || "");
@@ -39,20 +44,21 @@ function SpotForm({ isEdit }) {
       setDescription(spot.description || "");
       setName(spot.name || "");
       setPrice(spot.price || "");
-  
+
       if (spot.SpotImages) {
-        spot.SpotImages.forEach((image, index) => {
-          if (index === 0) setPreviewImage(image?.url || "");
-          if (index === 1) setImage1(image?.url || "");
-          if (index === 2) setImage2(image?.url || "");
-          if (index === 3) setImage3(image?.url || "");
-          if (index === 4) setImage4(image?.url || "");
+        const previewImage = spot.SpotImages.find((image) => image.preview);
+        const additionalImages = spot.SpotImages.filter((image) => !image.preview);
+
+        setPreviewImage(previewImage?.url || "");
+        additionalImages.forEach((image, index) => {
+          if (index === 0) setImage1(image?.url || "");
+          if (index === 1) setImage2(image?.url || "");
+          if (index === 2) setImage3(image?.url || "");
+          if (index === 3) setImage4(image?.url || "");
         });
       }
     }
   }, [isEdit, spot, id, dispatch]);
-  
-  
 
   const [country, setCountry] = useState(spot?.country || "");
   const [address, setAddress] = useState(spot?.address || "");
@@ -152,7 +158,7 @@ function SpotForm({ isEdit }) {
       let spotId;
 
       if (isEdit) {
-        spotId = await dispatch(editSpot(id, formData))
+        spotId = await dispatch(editSpot(id, formData));
       } else {
         spotId = await dispatch(createSpot(formData));
       }
@@ -169,7 +175,9 @@ function SpotForm({ isEdit }) {
   return (
     <div className="spot-create-container">
       <form className="spot-create-form-container" onSubmit={handleSubmit}>
-        <h1 className="form-heading">{isEdit ? "Update your Spot" : "Create a New Spot"}</h1>
+        <h1 className="form-heading">
+          {isEdit ? "Update your Spot" : "Create a New Spot"}
+        </h1>
 
         {/* Spot location */}
         <div className="spot-create-section-header">
@@ -206,62 +214,72 @@ function SpotForm({ isEdit }) {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
-
-          <label htmlFor="city">
-            City
-            {formErrors.city && (
-              <span className="error-message">{formErrors.city}</span>
-            )}
-          </label>
-          <input
-            type="text"
-            id="city"
-            placeholder="City"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-
-          <label htmlFor="state">
-            State
-            {formErrors.state && (
-              <span className="error-message">{formErrors.state}</span>
-            )}
-          </label>
-          <input
-            type="text"
-            id="state"
-            placeholder="STATE"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-          />
-
-          <label htmlFor="latitude">
-            Latitude
-            {formErrors.latitude && (
-              <span className="error-message">{formErrors.latitude}</span>
-            )}
-          </label>
-          <input
-            type="text"
-            id="latitude"
-            placeholder="Latitude"
-            value={latitude}
-            onChange={(e) => setLatitude(e.target.value)}
-          />
-
-          <label htmlFor="longitude">
-            Longitude
-            {formErrors.longitude && (
-              <span className="error-message">{formErrors.longitude}</span>
-            )}
-          </label>
-          <input
-            type="text"
-            id="longitude"
-            placeholder="Longitude"
-            value={longitude}
-            onChange={(e) => setLongitude(e.target.value)}
-          />
+          <div className="spot-form-city-state-container">
+            <div>
+              <label htmlFor="city">
+                City
+                {formErrors.city && (
+                  <span className="error-message">{formErrors.city}</span>
+                )}
+              </label>
+              <input
+                type="text"
+                id="city"
+                placeholder="City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
+            <div className="spot-form-comma">,</div>
+            <div>
+              <label htmlFor="state">
+                State
+                {formErrors.state && (
+                  <span className="error-message">{formErrors.state}</span>
+                )}
+              </label>
+              <input
+                type="text"
+                id="state"
+                placeholder="STATE"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="spot-form-lat-lng-container">
+            <div>
+              <label htmlFor="latitude">
+                Latitude
+                {formErrors.latitude && (
+                  <span className="error-message">{formErrors.latitude}</span>
+                )}
+              </label>
+              <input
+                type="text"
+                id="latitude"
+                placeholder="Latitude"
+                value={latitude}
+                onChange={(e) => setLatitude(e.target.value)}
+              />
+            </div>
+            <div className="spot-form-comma">,</div>
+            <div>
+              <label htmlFor="longitude">
+                Longitude
+                {formErrors.longitude && (
+                  <span className="error-message">{formErrors.longitude}</span>
+                )}
+              </label>
+              <input
+                type="text"
+                id="longitude"
+                placeholder="Longitude"
+                value={longitude}
+                onChange={(e) => setLongitude(e.target.value)}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Spot description */}
@@ -360,9 +378,7 @@ function SpotForm({ isEdit }) {
             onChange={(e) => setImage1(e.target.value)}
           />
           {formErrors.image1 && (
-            <span className="error-message error-image">
-              {formErrors.image1}
-            </span>
+            <span className="error-message error-image">{formErrors.image1}</span>
           )}
           <input
             type="url"
@@ -372,9 +388,7 @@ function SpotForm({ isEdit }) {
             onChange={(e) => setImage2(e.target.value)}
           />
           {formErrors.image2 && (
-            <span className="error-message error-image">
-              {formErrors.image2}
-            </span>
+            <span className="error-message error-image">{formErrors.image2}</span>
           )}
           <input
             type="url"
@@ -384,9 +398,7 @@ function SpotForm({ isEdit }) {
             onChange={(e) => setImage3(e.target.value)}
           />
           {formErrors.image3 && (
-            <span className="error-message error-image">
-              {formErrors.image3}
-            </span>
+            <span className="error-message error-image">{formErrors.image3}</span>
           )}
           <input
             type="url"
@@ -396,9 +408,7 @@ function SpotForm({ isEdit }) {
             onChange={(e) => setImage4(e.target.value)}
           />
           {formErrors.image4 && (
-            <span className="error-message error-image">
-              {formErrors.image4}
-            </span>
+            <span className="error-message error-image">{formErrors.image4}</span>
           )}
         </div>
 

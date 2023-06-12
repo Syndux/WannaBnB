@@ -67,6 +67,7 @@
   color: red;
   margin-left: 5px;
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .error-description, .error-name, .error-price, .error-image {
@@ -89,4 +90,20 @@
 
 .spot-create-button:hover {
   background-color: #ff5a60e8;
+}
+
+.spot-form-lat-lng-container,
+.spot-form-city-state-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spot-form-comma {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 25px 5px 0px 2px;
+}
+
+#city {
+  width: 240px;
 }

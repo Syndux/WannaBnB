@@ -39,7 +39,7 @@
 
 .spot-reserve-card {
   border: 2px solid black;
-  padding: 10px;
+  padding: 20px;
   border-radius: 5px;
   margin-top: 20px;
 }
@@ -47,6 +47,14 @@
 .spot-reserve-info {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.spot-avg-rating {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .spot-avg-rating i {
@@ -62,8 +70,4 @@
   border-radius: 5px;
   cursor: pointer;
   width: 200px;
-}
-
-.login-button:hover {
-  background-color: #ff5a60e8;
 }
