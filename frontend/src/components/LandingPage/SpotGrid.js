@@ -9,9 +9,7 @@ const SpotGrid = ({ spots, manage }) => {
   return (
     <div className="spot-grid">
       {spotsArr.map((spot) => (
-        <Link to={`/spots/${spot.id}`} key={spot.id}>
-          <SpotTile spot={spot} manage={manage} />
-        </Link>
+        <SpotTile key={spot.id} spot={spot} manage={manage} />
       ))}
     </div>
   );
