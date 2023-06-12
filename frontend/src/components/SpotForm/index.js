@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
-import { loadAllSpots, createSpot, editSpot } from "../../store/spots";
+import { loadAllSpots, createSpot, editSpot, getSpotDetails } from "../../store/spots";
 import "./SpotForm.css";
 
 function SpotForm({ isEdit }) {
@@ -21,7 +21,15 @@ function SpotForm({ isEdit }) {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isEdit && spot) {
+    const fetchSpotDetails = async (id) => {
+      await dispatch(getSpotDetails(id));
+    };
+  
+    if (isEdit && spot && !spot.SpotImages) {
+      fetchSpotDetails(id);
+    }
+  
+    if (spot) {
       setCountry(spot.country || "");
       setAddress(spot.address || "");
       setCity(spot.city || "");
@@ -31,13 +39,20 @@ function SpotForm({ isEdit }) {
       setDescription(spot.description || "");
       setName(spot.name || "");
       setPrice(spot.price || "");
-      setPreviewImage(spot.previewImage || "");
-      setImage1(spot.image1 || "");
-      setImage2(spot.image2 || "");
-      setImage3(spot.image3 || "");
-      setImage4(spot.image4 || "");
+  
+      if (spot.SpotImages) {
+        spot.SpotImages.forEach((image, index) => {
+          if (index === 0) setPreviewImage(image?.url || "");
+          if (index === 1) setImage1(image?.url || "");
+          if (index === 2) setImage2(image?.url || "");
+          if (index === 3) setImage3(image?.url || "");
+          if (index === 4) setImage4(image?.url || "");
+        });
+      }
     }
-  }, [isEdit, spot]);
+  }, [isEdit, spot, id, dispatch]);
+  
+  
 
   const [country, setCountry] = useState(spot?.country || "");
   const [address, setAddress] = useState(spot?.address || "");
@@ -146,7 +161,7 @@ function SpotForm({ isEdit }) {
   };
 
   if (isEdit && isRendered && spot) {
-    if (spot.ownerId !== sessionUser.id) {
+    if (!sessionUser || spot.ownerId !== sessionUser.id) {
       return <div className="unauthorized">Not authorized to edit this spot</div>;
     }
   }
