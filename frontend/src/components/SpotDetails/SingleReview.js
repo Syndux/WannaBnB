@@ -8,7 +8,6 @@ const SingleReview = ({ review }) => {
   const [showModal, setShowModal] = useState(false);
   const user = useSelector(state => state.session.user)
 
-
   const monthNames = [
     "January",
     "February",
