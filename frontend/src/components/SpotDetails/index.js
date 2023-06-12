@@ -6,6 +6,7 @@ import { getSpotDetails } from "../../store/spots";
 import SpotImages from "./SpotImages";
 import SpotDesc from "./SpotDesc";
 import SpotReserve from "./SpotReserve";
+import SpotReviews from "./SpotReviews";
 import "./SpotDetails.css";
 
 const SpotDetails = () => {
@@ -34,7 +35,9 @@ const SpotDetails = () => {
           <SpotDesc spot={spot} />
           <SpotReserve spot={spot} />
         </div>
-        <div className="spot-reviews"></div>
+        <div className="spot-reviews-container">
+          <SpotReviews spot={spot} />
+        </div>
       </div>
     )
   );
