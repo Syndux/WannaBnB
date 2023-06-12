@@ -5,6 +5,7 @@ const LOAD = "spots/LOAD";
 const LOAD_SINGLE = "spots/LOAD_SINGLE";
 const ADD_SPOT = "spots/ADD_SPOT";
 const ADD_IMAGE = "spots/ADD_IMAGE";
+const EDIT_SPOT = "spots/EDIT_SPOT";
 
 // Action Creators
 const load = (spots) => ({
@@ -25,6 +26,11 @@ const addSpot = (spot) => ({
 const addImage = (spotId, image) => ({
   type: ADD_IMAGE,
   payload: { spotId, image },
+});
+
+const updateSpot = (spot) => ({
+  type: EDIT_SPOT,
+  spot,
 });
 
 // Thunk Action Creators
@@ -87,6 +93,19 @@ export const createSpot = (formData) => async (dispatch) => {
     return spotId;
   }
 };
+
+export const editSpot = (id, formData) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(formData),
+  });
+
+  if (response.ok) {
+    const spot = await response.json();
+    dispatch(updateSpot(spot));
+    return spot.id;
+  }
+}
 
 // Initial state
 const initialState = {};

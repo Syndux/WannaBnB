@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { createSpot } from "../../store/spots";
 
-import { loadAllSpots } from "../../store/spots";
-import "./CreateSpotForm.css";
+import { loadAllSpots, createSpot, editSpot, getSpotDetails } from "../../store/spots";
+import "./SpotForm.css";
 
-function CreateSpotForm() {
+function SpotForm({ isEdit }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
@@ -22,6 +21,14 @@ function CreateSpotForm() {
   }, [dispatch]);
 
   useEffect(() => {
+    const fetchSpotDetails = async (id) => {
+      await dispatch(getSpotDetails(id));
+    };
+  
+    if (isEdit && spot && !spot.SpotImages) {
+      fetchSpotDetails(id);
+    }
+  
     if (spot) {
       setCountry(spot.country || "");
       setAddress(spot.address || "");
@@ -32,13 +39,20 @@ function CreateSpotForm() {
       setDescription(spot.description || "");
       setName(spot.name || "");
       setPrice(spot.price || "");
-      setPreviewImage(spot.previewImage || "");
-      setImage1(spot.image1 || "");
-      setImage2(spot.image2 || "");
-      setImage3(spot.image3 || "");
-      setImage4(spot.image4 || "");
+  
+      if (spot.SpotImages) {
+        spot.SpotImages.forEach((image, index) => {
+          if (index === 0) setPreviewImage(image?.url || "");
+          if (index === 1) setImage1(image?.url || "");
+          if (index === 2) setImage2(image?.url || "");
+          if (index === 3) setImage3(image?.url || "");
+          if (index === 4) setImage4(image?.url || "");
+        });
+      }
     }
-  }, [spot]);
+  }, [isEdit, spot, id, dispatch]);
+  
+  
 
   const [country, setCountry] = useState(spot?.country || "");
   const [address, setAddress] = useState(spot?.address || "");
@@ -135,14 +149,19 @@ function CreateSpotForm() {
         ],
       };
 
-      console.log(formData);
-      const spotId = await dispatch(createSpot(formData));
+      let spotId;
+
+      if (isEdit) {
+        spotId = await dispatch(editSpot(id, formData))
+      } else {
+        spotId = await dispatch(createSpot(formData));
+      }
       history.push(`/spots/${spotId}`);
     }
   };
 
-  if (isRendered && spot) {
-    if (spot.ownerId !== sessionUser.id) {
+  if (isEdit && isRendered && spot) {
+    if (!sessionUser || spot.ownerId !== sessionUser.id) {
       return <div className="unauthorized">Not authorized to edit this spot</div>;
     }
   }
@@ -150,7 +169,7 @@ function CreateSpotForm() {
   return (
     <div className="spot-create-container">
       <form className="spot-create-form-container" onSubmit={handleSubmit}>
-        <h1 className="form-heading">{id ? "Update your Spot" : "Create a New Spot"}</h1>
+        <h1 className="form-heading">{isEdit ? "Update your Spot" : "Create a New Spot"}</h1>
 
         {/* Spot location */}
         <div className="spot-create-section-header">
@@ -385,7 +404,7 @@ function CreateSpotForm() {
 
         <div className="button-container">
           <button className="spot-create-button" type="submit">
-            {id ? "Update your Spot" : "Create Spot"}
+            {isEdit ? "Update your Spot" : "Create Spot"}
           </button>
         </div>
       </form>
@@ -393,4 +412,4 @@ function CreateSpotForm() {
   );
 }
 
-export default CreateSpotForm;
+export default SpotForm;
