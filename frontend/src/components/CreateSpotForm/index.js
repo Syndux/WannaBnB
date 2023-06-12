@@ -150,7 +150,7 @@ function CreateSpotForm() {
   return (
     <div className="spot-create-container">
       <form className="spot-create-form-container" onSubmit={handleSubmit}>
-        <h1 className="form-heading">Create a New Spot</h1>
+        <h1 className="form-heading">{id ? "Update your Spot" : "Create a New Spot"}</h1>
 
         {/* Spot location */}
         <div className="spot-create-section-header">
@@ -340,6 +340,11 @@ function CreateSpotForm() {
             value={image1}
             onChange={(e) => setImage1(e.target.value)}
           />
+          {formErrors.image1 && (
+            <span className="error-message error-image">
+              {formErrors.image1}
+            </span>
+          )}
           <input
             type="url"
             id="image-2"
@@ -347,6 +352,11 @@ function CreateSpotForm() {
             value={image2}
             onChange={(e) => setImage2(e.target.value)}
           />
+          {formErrors.image2 && (
+            <span className="error-message error-image">
+              {formErrors.image2}
+            </span>
+          )}
           <input
             type="url"
             id="image-3"
@@ -354,6 +364,11 @@ function CreateSpotForm() {
             value={image3}
             onChange={(e) => setImage3(e.target.value)}
           />
+          {formErrors.image3 && (
+            <span className="error-message error-image">
+              {formErrors.image3}
+            </span>
+          )}
           <input
             type="url"
             id="image-4"
@@ -361,11 +376,16 @@ function CreateSpotForm() {
             value={image4}
             onChange={(e) => setImage4(e.target.value)}
           />
+          {formErrors.image4 && (
+            <span className="error-message error-image">
+              {formErrors.image4}
+            </span>
+          )}
         </div>
 
         <div className="button-container">
           <button className="spot-create-button" type="submit">
-            Create Spot
+            {id ? "Update your Spot" : "Create Spot"}
           </button>
         </div>
       </form>
