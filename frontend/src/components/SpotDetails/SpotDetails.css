@@ -56,6 +56,7 @@
   padding: 20px;
   border-radius: 5px;
   margin-top: 20px;
+  height: 68px;
 }
 
 .spot-reserve-info {
@@ -87,3 +88,6 @@
 }
 
 /* SpotReviews */
+.spot-reviews-container {
+  border-top: 2px solid black;
+}
