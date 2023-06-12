@@ -57,8 +57,9 @@
   border: 2px solid black;
   padding: 20px;
   border-radius: 5px;
-  margin-top: 20px;
-  height: 68px;
+  margin: 20px 0px;
+  /* height: 68px; */
+  height: fit-content;
 }
 
 .spot-reserve-info {
@@ -76,16 +77,6 @@
   font-size: 14px;
 }
 
-.spot-avg-rating {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.spot-avg-rating i {
-  margin-right: 2px;
-}
-
 .reserve-button {
   padding: 10px;
   font-size: 12px;
@@ -94,7 +85,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 200px;
+  width: 250px;
 }
 
 /* SpotReviews */

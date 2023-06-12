@@ -1,4 +1,5 @@
 import React from "react";
+import SpotImages from "./SpotImages";
 
 const SpotReserve = ({ spot }) => {
   const reserveSpot = () => {
@@ -13,12 +14,15 @@ const SpotReserve = ({ spot }) => {
         </div>
         <div className="spot-avg-rating">
           <i className="fa-solid fa-star" />
+          {" "}
           <span className="spot-avg-rating-new">
             {spot.avgStarRating
               ? spot.avgStarRating.toFixed(
                   Number.isInteger(spot.avgStarRating) ? 1 : 2
                 )
               : "New"}
+            {spot.numReviews ? " · " + `${spot.numReviews}` : ""}
+            {spot.numReviews ? (spot.numReviews > 1 ? " reviews" :  " review") : ""}
           </span>
         </div>
       </div>

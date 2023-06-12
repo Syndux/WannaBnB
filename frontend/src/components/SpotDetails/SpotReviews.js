@@ -1,3 +1,5 @@
+import React from "react";
+
 const SpotReviews = ({spot}) => {
   return (
     <div>
