@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SpotTile = ({ spot, manage }) => {
   return (
@@ -28,18 +29,12 @@ const SpotTile = ({ spot, manage }) => {
       </div>
       {manage && (
         <div className="spot-tile-manage-container">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            Update
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
+          <Link to={`/spots/${spot.id}/edit`}>
+            <button>
+              Update
+            </button>
+          </Link>
+          <button onClick={(e) => {e.stopPropagation()}}>
             Delete
           </button>
         </div>
