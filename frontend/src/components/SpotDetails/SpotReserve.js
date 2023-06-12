@@ -12,10 +12,10 @@ const SpotReserve = ({ spot }) => {
         <div className="spot-price">
           {`$${spot.price}`} <span className="spot-price-unit">night</span>
         </div>
-        <div className="spot-avg-rating">
+        <div className="spot-avg-rating-container">
           <i className="fa-solid fa-star" />
           {" "}
-          <span className="spot-avg-rating-new">
+          <span className="spot-avg-rating">
             {spot.avgStarRating
               ? spot.avgStarRating.toFixed(
                   Number.isInteger(spot.avgStarRating) ? 1 : 2
