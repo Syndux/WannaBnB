@@ -63,10 +63,18 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  align-items: last baseline;
+}
+
+.spot-price-unit {
+  font-size: 14px;
+}
+
+.spot-avg-rating-new {
+  font-size: 14px;
 }
 
 .spot-avg-rating {
-  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
