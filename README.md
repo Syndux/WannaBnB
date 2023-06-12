@@ -12,7 +12,7 @@ A wanna-be AirBnB, WannaBnB, by Huey Nguyen.
 - React
 
 ## At least a single image or gif showcasing the project.
-- IMAGE HERE
+![image](https://github.com/Syndux/WannaBnB/assets/78172054/49f5f54d-362f-46d4-9a5e-fd867a4fe090)
 
 ## Complete instructions on how to launch the full application locally.
 1. Clone repo https://github.com/Syndux/WannaBnB
