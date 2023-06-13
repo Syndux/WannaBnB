@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../../store/session";
@@ -15,6 +15,16 @@ function SignUpForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [formDisable, setFormDisable] = useState(true);
+  const [serverErrors, setServerErrors] = useState([]);
+
+  useEffect(() => {
+    if (email && username && firstName && lastName && password && confirmPassword) {
+      setFormDisable(false);
+    } else {
+      setFormDisable(true);
+    }
+  }, [email, username, firstName, lastName, password, confirmPassword]);
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -33,12 +43,13 @@ function SignUpForm() {
       ).catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
-          setErrors(data.errors);
+          setServerErrors(data.errors);
         }
       });
     }
     return setErrors({
-      confirmPassword: "Confirm Password field must be the same as the Password field"
+      confirmPassword:
+        "Confirm Password field must be the same as the Password field",
     });
   };
 
@@ -67,7 +78,9 @@ function SignUpForm() {
             required
           />
         </div>
-        {errors.username && <p className="signup-error-message">{errors.username}</p>}
+        {errors.username && (
+          <p className="signup-error-message">{errors.username}</p>
+        )}
         <div className="signup-form-group">
           <input
             type="text"
@@ -78,7 +91,9 @@ function SignUpForm() {
             required
           />
         </div>
-        {errors.firstName && <p className="signup-error-message">{errors.firstName}</p>}
+        {errors.firstName && (
+          <p className="signup-error-message">{errors.firstName}</p>
+        )}
         <div className="signup-form-group">
           <input
             type="text"
@@ -89,7 +104,9 @@ function SignUpForm() {
             required
           />
         </div>
-        {errors.lastName && <p className="signup-error-message">{errors.lastName}</p>}
+        {errors.lastName && (
+          <p className="signup-error-message">{errors.lastName}</p>
+        )}
         <div className="signup-form-group">
           <input
             type="password"
@@ -100,7 +117,9 @@ function SignUpForm() {
             required
           />
         </div>
-        {errors.password && <p className="signup-error-message">{errors.password}</p>}
+        {errors.password && (
+          <p className="signup-error-message">{errors.password}</p>
+        )}
         <div className="signup-form-group">
           <input
             type="password"
@@ -114,12 +133,22 @@ function SignUpForm() {
         {errors.confirmPassword && (
           <p className="signup-error-message">{errors.confirmPassword}</p>
         )}
-        <button type="submit" className="signup-button">
+        {serverErrors.length > 0 && (
+          <ul className="signup-error-message">
+            {serverErrors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        )}
+        <button
+          type="submit"
+          className={`signup-button ${formDisable ? "disabled" : ""}`}
+        >
           Sign Up
         </button>
       </form>
     </div>
   );
-};
+}
 
 export default SignUpForm;
