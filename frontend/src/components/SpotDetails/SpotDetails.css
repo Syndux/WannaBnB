@@ -34,6 +34,18 @@
   grid-area: photoOne;
 }
 
+.preview-image > img {
+  border-radius: 10px 0px 0px 10px;
+}
+
+.additional-image-index1 > img {
+  border-radius: 0px 10px 0px 0px;
+}
+
+.additional-image-index3 > img {
+  border-radius: 0px 0px 10px 0px;
+}
+
 /* Spot Desc/Reserve */
 .hosted-by {
   font-size: 24px;
