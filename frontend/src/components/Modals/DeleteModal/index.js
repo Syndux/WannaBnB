@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { deleteSpot } from "../../../store/spots";
+import { getSpotDetails, deleteSpot } from "../../../store/spots";
 import { deleteReview } from "../../../store/reviews";
 
 import "./DeleteModal.css";
 
-const DeleteModal = ({ onClose, spotId, reviewId }) => {
+const DeleteModal = ({ onClose, spotId, reviewId, spot }) => {
   const dispatch = useDispatch();
 
   const handleYes = (e) => {
@@ -17,6 +17,7 @@ const DeleteModal = ({ onClose, spotId, reviewId }) => {
         await dispatch(deleteSpot(spotId));
       } else {
         await dispatch(deleteReview(reviewId));
+        await dispatch(getSpotDetails(spot.id));
       }
     })();
   };

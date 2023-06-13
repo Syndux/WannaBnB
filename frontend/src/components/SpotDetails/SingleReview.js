@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Modal } from "../../context/Modal";
 import DeleteModal from "../Modals/DeleteModal";
 
-const SingleReview = ({ review }) => {
+const SingleReview = ({ review, spot }) => {
   const [showModal, setShowModal] = useState(false);
   const user = useSelector(state => state.session.user)
 
@@ -47,7 +47,7 @@ const SingleReview = ({ review }) => {
           </button>
           {showModal && (
             <Modal onClose={() => setShowModal(false)}>
-              <DeleteModal onClose={() => setShowModal(false)} reviewId={`${review.id}`} />
+              <DeleteModal onClose={() => setShowModal(false)} reviewId={`${review.id}`} spot={spot} />
             </Modal>
           )}
         </div>
