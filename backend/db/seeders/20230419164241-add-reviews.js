@@ -13,22 +13,40 @@ module.exports = {
       options,
       [
         {
-          review: 'lots of text go here for the review content',
+          review: 'Review 1 for Spot1 from User2',
           stars: 5,
-          userId: 1,
+          userId: 2,
           spotId: 1,
         },
         {
-          review: 'text goes here for the review content',
+          review: 'Review 2 for Spot2 from User3',
           stars: 4,
-          userId: 2,
+          userId: 3,
           spotId: 2,
         },
         {
-          review: 'some text goes here for the review content',
+          review: 'Review 3 for Spot3 from Demo',
           stars: 3,
-          userId: 3,
+          userId: 1,
           spotId: 3,
+        },
+        {
+          review: 'Review 4 for Spot1 from User3',
+          stars: 1,
+          userId: 3,
+          spotId: 1,
+        },
+        {
+          review: 'Review 5 for Spot1 from User4',
+          stars: 2,
+          userId: 4,
+          spotId: 1,
+        },
+        {
+          review: 'Review 6 for Spot1 from User5',
+          stars: 5,
+          userId: 5,
+          spotId: 1,
         }
       ],
       {}
