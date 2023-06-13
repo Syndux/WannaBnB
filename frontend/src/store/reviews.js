@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { getSpotDetails } from "./spots";
 
 // Action Types
 const LOAD_REVIEWS = "reviews/LOAD_REVIEWS";
@@ -46,6 +47,7 @@ export const createReview = (id, formData) => async (dispatch) => {
   if (response.ok) {
     const review = await response.json();
     dispatch(getSpotReviews(id));
+    dispatch(getSpotDetails(id));
   }
 };
 

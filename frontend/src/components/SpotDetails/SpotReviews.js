@@ -59,7 +59,7 @@ const SpotReviews = ({ spot }) => {
       )}
 
       {reviews.length ? (
-        <ReviewsList reviews={reviews} />
+        <ReviewsList reviews={reviews} spot={spot} />
       ) : (
         <>{!isOwner && <p>Be the first to post a review!</p>}</>
       )}
