@@ -19,8 +19,6 @@ const DeleteModal = ({ onClose, spotId, reviewId }) => {
         await dispatch(deleteReview(reviewId));
       }
     })();
-
-    onClose();
   };
 
   return (

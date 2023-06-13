@@ -1,5 +1,3 @@
-import './SpotImages.css'
-
 const SpotImages = ({ spot }) => {
   if (!spot.SpotImages) {
     return null;
