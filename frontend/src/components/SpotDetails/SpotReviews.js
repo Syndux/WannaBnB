@@ -19,11 +19,9 @@ const SpotReviews = ({ spot }) => {
 
   useEffect(() => {
     (async () => {
-      if(spot.numReviews) {
-        await dispatch(getSpotReviews(spot.id));
-      }
+      await dispatch(getSpotReviews(spot.id));
     })();
-  }, [dispatch, update, spot.id]);
+  }, [dispatch, update, spot]);
 
   return (
     <div className="spot-reviews-content-container">

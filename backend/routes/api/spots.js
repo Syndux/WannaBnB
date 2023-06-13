@@ -99,15 +99,8 @@ router.get("/:id/reviews", async (req, res, next) => {
     ],
   });
 
-  if (reviews.length) {
-    prettifyDateTime(reviews);
-    return res.json({ Reviews: reviews });
-  } else {
-    return next({
-      message: "Spot couldn't be found",
-      status: 404,
-    });
-  }
+  prettifyDateTime(reviews);
+  return res.json({ Reviews: reviews });
 });
 
 // Create review for spot from id
