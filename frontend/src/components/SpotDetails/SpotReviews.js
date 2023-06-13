@@ -15,7 +15,6 @@ const SpotReviews = ({ spot }) => {
   const reviews = useSelector((state) => Object.values(state.reviews));
   const oldReview = reviews.find(({ userId }) => user?.id === userId);
   const isOwner = spot.ownerId === user?.id;
-  console.log(reviews);
 
   useEffect(() => {
     (async () => {
