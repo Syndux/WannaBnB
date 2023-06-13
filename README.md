@@ -1,7 +1,7 @@
 ## Introduction
 A wanna-be AirBnB, WannaBnB, by Huey Nguyen.
 
-## List of technologies used on the project.
+## Technologies used on the project
 - JavaScript
 - HTML
 - CSS
@@ -11,10 +11,10 @@ A wanna-be AirBnB, WannaBnB, by Huey Nguyen.
 - Postgres
 - React
 
-## At least a single image or gif showcasing the project.
+## Project Showcase
 ![image](https://github.com/Syndux/WannaBnB/assets/78172054/49f5f54d-362f-46d4-9a5e-fd867a4fe090)
 
-## Complete instructions on how to launch the full application locally.
+## How to launch the full application locally
 1. Clone repo https://github.com/Syndux/WannaBnB
 2. cd into backend/
 3. Copy the .env.example file into .env
