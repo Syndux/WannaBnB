@@ -15,15 +15,12 @@ const SpotReviews = ({ spot }) => {
   const reviews = useSelector((state) => Object.values(state.reviews));
   const oldReview = reviews.find(({ userId }) => user?.id === userId);
   const isOwner = spot.ownerId === user?.id;
-  console.log(reviews);
 
   useEffect(() => {
     (async () => {
-      if(spot.numReviews) {
-        await dispatch(getSpotReviews(spot.id));
-      }
+      await dispatch(getSpotReviews(spot.id));
     })();
-  }, [dispatch, update, spot.id]);
+  }, [dispatch, update, spot]);
 
   return (
     <div className="spot-reviews-content-container">

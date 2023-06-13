@@ -12,7 +12,10 @@ const SpotImages = ({ spot }) => {
         <img src={previewImage.url} alt="Spot Preview" />
       </div>
       {additionalImages.map((image, index) => (
-        <div className="additional-image" key={index}>
+        <div
+          className={`additional-image-index${index}`}
+          key={index}
+        >
           <img src={image.url} alt={`Spot Image ${index + 1}`} />
         </div>
       ))}

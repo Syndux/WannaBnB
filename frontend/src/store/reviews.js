@@ -45,7 +45,7 @@ export const createReview = (id, formData) => async (dispatch) => {
 
   if (response.ok) {
     const review = await response.json();
-    dispatch(addReview(review));
+    dispatch(getSpotReviews(id));
   }
 };
 
