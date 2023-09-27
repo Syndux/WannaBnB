@@ -61,7 +61,7 @@ const CreateReviewModal = ({ spotId }) => {
         )}
         <textarea
           className="create-review-content"
-          placeholder="Review"
+          placeholder="Leave your review here..."
           onChange={handleInput}
           rows="6"
         />
