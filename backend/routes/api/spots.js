@@ -299,6 +299,9 @@ router.get("/:id", async (req, res, next) => {
     });
   }
 
+  const images = await spot.getImages({ where: { preview: true } });
+  const previewImage = images.length > 0 ? images[0].url : null;
+
   const numReviews = await spot.countReviews();
 
   const reviews = await spot.getReviews();
@@ -315,7 +318,7 @@ router.get("/:id", async (req, res, next) => {
 
   prettifyDateTime(spot);
 
-  resSpot = { ...spot.toJSON(), numReviews, avgStarRating, SpotImages, Owner};
+  resSpot = { ...spot.toJSON(), previewImage, numReviews, avgStarRating, SpotImages, Owner};
 
   return res.json(resSpot);
 });
