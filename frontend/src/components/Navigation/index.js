@@ -19,7 +19,7 @@ function Navigation({ isLoaded }) {
         <>
           {sessionUser && (
             <NavLink to="/spots/new" className="new-spot-link">
-              <button onClick={(e) => {e.stopPropagation()}}>Create a New Spot</button>
+              <button className="button-exclude" onClick={(e) => {e.stopPropagation()}}>Create a New Spot</button>
             </NavLink>
           )}
           <ProfileButton user={sessionUser} />
