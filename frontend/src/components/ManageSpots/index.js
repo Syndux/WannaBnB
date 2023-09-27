@@ -22,9 +22,9 @@ const ManageSpots = () => {
     <>
       <div className="manage-spots-container">
         <h1>Manage Your Spots</h1>
-        {spots.length && <Link to="/spots/new">
+        <Link to="/spots/new">
           <button className="manage-spots-create-spot-button">Create a New Spot</button>
-        </Link>}
+        </Link>
       </div>
       <SpotGrid spots={spots} manage={true} />
     </>

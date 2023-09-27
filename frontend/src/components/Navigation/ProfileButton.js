@@ -44,7 +44,7 @@ function ProfileButton({ user }) {
 
   return (
     <div className="profile-button">
-      <button onClick={openMenu}>
+      <button onClick={openMenu} className="button-exclude">
         <i className="fa-solid fa-bars fa-lg" /> 
         <i className="fas fa-user-circle fa-xl" />
       </button>
