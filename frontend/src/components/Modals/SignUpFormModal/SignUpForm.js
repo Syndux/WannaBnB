@@ -19,7 +19,7 @@ function SignUpForm() {
   const [serverErrors, setServerErrors] = useState([]);
 
   useEffect(() => {
-    if (email && username && firstName && lastName && password && confirmPassword) {
+    if (email && username.length >= 4 && firstName && lastName && password.length >= 6 && confirmPassword && password === confirmPassword) {
       setFormDisable(false);
     } else {
       setFormDisable(true);
