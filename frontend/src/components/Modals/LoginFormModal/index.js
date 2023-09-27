@@ -12,6 +12,7 @@ function LoginFormModal({ onClick }) {
           setShowModal(true);
           onClick();
         }}
+        className="button-exclude"
       >
         Log In
       </button>

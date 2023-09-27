@@ -68,7 +68,7 @@ function ProfileButton({ user }) {
             <p className="profile-dropdown-divider" />
 
             <div className="profile-dropdown-button-container">
-              <button className="logout-button" onClick={logout}>
+              <button className="logout-button button-exclude" onClick={logout}>
                 Log Out
               </button>
             </div>

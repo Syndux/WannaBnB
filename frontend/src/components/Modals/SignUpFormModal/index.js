@@ -12,6 +12,7 @@ function SignUpFormModal({ onClick }) {
           setShowModal(true);
           onClick();
         }}
+        className="button-exclude"
       >
         Sign Up
       </button>
