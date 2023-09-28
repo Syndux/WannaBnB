@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Modal } from "../../context/Modal";
-import { getSpotDetails } from "../../store/spots";
 import { getSpotReviews } from "../../store/reviews";
 import CreateReviewModal from "../Modals/CreateReviewModal";
 import ReviewsList from "./ReviewsList";
@@ -15,14 +14,16 @@ const SpotReviews = ({ spot }) => {
   const reviews = useSelector((state) => Object.values(state.reviews));
   const oldReview = reviews.find(({ userId }) => user?.id === userId);
   const isOwner = spot.ownerId === user?.id;
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
       await dispatch(getSpotReviews(spot.id));
+      setLoaded(true);
     })();
   }, [dispatch, update, spot]);
 
-  return (
+  return loaded && (
     <div className="spot-reviews-content-container">
       <div className="spot-reviews-avg-rating-container">
         <i className="fa-sharp fa-solid fa-star" />{" "}

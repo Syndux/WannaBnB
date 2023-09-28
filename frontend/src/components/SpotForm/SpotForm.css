@@ -70,6 +70,13 @@
   white-space: nowrap;
 }
 
+.error-message-latlng {
+  color: red;
+  margin-left: 5px;
+  font-size: 14px;
+  display: inline;
+}
+
 .error-description, .error-name, .error-price, .error-image {
   margin-left: 0px;
 }
