@@ -100,7 +100,7 @@ function SpotForm({ isEdit }) {
       errors.state = "State is required";
     }
     if (!latitude) {
-      errors.latitude = "Latitude is required";
+      errors.latitude = "Latitude required";
     } else {
       const latValue = parseFloat(latitude);
       if (isNaN(latValue) || latValue < -90 || latValue > 90) {
@@ -108,7 +108,7 @@ function SpotForm({ isEdit }) {
       }
     }
     if (!longitude) {
-      errors.longitude = "Longitude is required";
+      errors.longitude = "Longitude required";
     } else {
       const lngValue = parseFloat(longitude);
       if (isNaN(lngValue) || lngValue < -180 || lngValue > 180) {
