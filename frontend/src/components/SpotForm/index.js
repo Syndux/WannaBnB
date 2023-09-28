@@ -101,9 +101,19 @@ function SpotForm({ isEdit }) {
     }
     if (!latitude) {
       errors.latitude = "Latitude is required";
+    } else {
+      const latValue = parseFloat(latitude);
+      if (isNaN(latValue) || latValue < -90 || latValue > 90) {
+        errors.latitude = "Latitude must be a valid number between -90 and 90";
+      }
     }
     if (!longitude) {
       errors.longitude = "Longitude is required";
+    } else {
+      const lngValue = parseFloat(longitude);
+      if (isNaN(lngValue) || lngValue < -180 || lngValue > 180) {
+        errors.longitude = "Longitude must be a valid number between -180 and 180";
+      }
     }
     if (description.length < 30) {
       errors.description = "Description needs a minimum of 30 characters";
@@ -248,11 +258,11 @@ function SpotForm({ isEdit }) {
             </div>
           </div>
           <div className="spot-form-lat-lng-container">
-            <div>
+            <div className="spot-form-lat">
               <label htmlFor="latitude">
                 Latitude
                 {formErrors.latitude && (
-                  <span className="error-message">{formErrors.latitude}</span>
+                  <span className="error-message-latlng">{formErrors.latitude}</span>
                 )}
               </label>
               <input
@@ -264,11 +274,11 @@ function SpotForm({ isEdit }) {
               />
             </div>
             <div className="spot-form-comma">,</div>
-            <div>
+            <div className="spot-form-long">
               <label htmlFor="longitude">
                 Longitude
                 {formErrors.longitude && (
-                  <span className="error-message">{formErrors.longitude}</span>
+                  <span className="error-message-latlng">{formErrors.longitude}</span>
                 )}
               </label>
               <input
