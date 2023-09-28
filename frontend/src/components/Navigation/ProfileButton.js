@@ -65,8 +65,14 @@ function ProfileButton({ user }) {
                 Manage Reviews
               </Link>
             </li>
+            
             <p className="profile-dropdown-divider" />
-
+            <li>
+              <Link to="/about-dev" className="manage-link" onClick={closeMenu}>
+                About The Dev
+              </Link>
+            </li>
+            <p className="profile-dropdown-divider" />
             <div className="profile-dropdown-button-container">
               <button className="logout-button button-exclude" onClick={logout}>
                 Log Out

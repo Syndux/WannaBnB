@@ -8,6 +8,7 @@ import SpotForm from "./components/SpotForm";
 import ManageSpots from "./components/ManageSpots";
 import SpotDetails from "./components/SpotDetails";
 import ManageReviews from "./components/ManageReviews";
+import AboutTheDev from "./components/AboutTheDev";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,28 +21,33 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      
+
       {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route path="/spots/new">
-            <SpotForm isEdit={false} />
-          </Route>
-          <Route path="/spots/owned">
-            <ManageSpots />
-          </Route>
-          <Route path="/spots/:id/edit">
-            <SpotForm isEdit={true} />
-          </Route>
-          <Route path="/spots/:id">
-            <SpotDetails />
-          </Route>
-          <Route path="/reviews/current">
-            <ManageReviews />
-          </Route>
-        </Switch>
+        <>
+          <Switch>
+            <Route exact path="/">
+              <LandingPage />
+            </Route>
+            <Route path="/spots/new">
+              <SpotForm isEdit={false} />
+            </Route>
+            <Route path="/spots/owned">
+              <ManageSpots />
+            </Route>
+            <Route path="/spots/:id/edit">
+              <SpotForm isEdit={true} />
+            </Route>
+            <Route path="/spots/:id">
+              <SpotDetails />
+            </Route>
+            <Route path="/reviews/current">
+              <ManageReviews />
+            </Route>
+            <Route exact path="/about-dev">
+              <AboutTheDev />
+            </Route>
+          </Switch>
+        </>
       )}
     </>
   );
