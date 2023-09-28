@@ -1,0 +1,81 @@
+.about-dev-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 5rem;
+}
+
+/* About Title */
+.about-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* About Container */
+.about-container {
+  display: flex;
+  width: 100%;
+}
+
+/* About Content */
+.about-content {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+}
+
+/* About Image */
+.about-image {
+  width: 25rem;
+  border-radius: 1rem;
+}
+
+/* About Text */
+.about-text {
+  display: flex;
+  max-width: 30rem;
+  flex-direction: column;
+}
+
+/* About Name */
+.about-name {
+  font-weight: 600;
+  margin: 0px;
+  line-height: 1.5rem;
+  color: #4a5568;
+}
+
+/* About Role */
+.about-role {
+  font-size: 1rem;
+  margin: 0px;
+  margin-top: 8px;
+  line-height: 1.5rem;
+  color: #6b7280;
+}
+
+/* About Description */
+.about-description {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+/* About Links */
+.about-links {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding-left: 0px;
+}
+
+/* About Link */
+.about-link {
+  color: #6b7280;
+}
+
+@media screen and (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+  }
+}

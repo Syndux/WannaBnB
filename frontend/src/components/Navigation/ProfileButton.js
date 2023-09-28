@@ -69,7 +69,7 @@ function ProfileButton({ user }) {
             <p className="profile-dropdown-divider" />
             <li>
               <Link to="/about-dev" className="manage-link" onClick={closeMenu}>
-                About the Dev
+                About The Dev
               </Link>
             </li>
             <p className="profile-dropdown-divider" />
