@@ -45,7 +45,7 @@ function ProfileButton({ user }) {
   return (
     <div className="profile-button">
       <button onClick={openMenu} className="button-exclude">
-        <i className="fa-solid fa-bars fa-lg" /> 
+        <i className="fa-solid fa-bars fa-lg" />
         <i className="fas fa-user-circle fa-xl" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
@@ -61,11 +61,15 @@ function ProfileButton({ user }) {
               </Link>
             </li>
             <li>
-              <Link to="/reviews/current" className="manage-link" onClick={closeMenu}>
+              <Link
+                to="/reviews/current"
+                className="manage-link"
+                onClick={closeMenu}
+              >
                 Manage Reviews
               </Link>
             </li>
-            
+
             <p className="profile-dropdown-divider" />
             <li>
               <Link to="/about-dev" className="manage-link" onClick={closeMenu}>
@@ -86,6 +90,11 @@ function ProfileButton({ user }) {
             </li>
             <li>
               <LoginFormModal onClick={closeMenu} />
+            </li>
+            <li>
+              <Link to="/about-dev" className="about-dev-link" onClick={closeMenu}>
+                About The Dev
+              </Link>
             </li>
           </div>
         )}
