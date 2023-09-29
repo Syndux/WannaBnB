@@ -37,6 +37,7 @@ WannaBnB was built using the following technologies:
 - [Technical Implementation Details](https://github.com/Syndux/WannaBnB#technical-implementation-details)
 	- [Code Snippets](https://github.com/Syndux/WannaBnB#code-snippets)
 - [Author](https://github.com/Syndux/WannaBnB#author)
+- [Show your support](https://github.com/Syndux/WannaBnB#show-your-support)
 
 ## Installation
 
@@ -146,3 +147,7 @@ The project is fully functional in its current state, but some other features we
 👤 **Huey Nguyen**
 * [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Syndux)
 * [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/huey-nguyen/)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
