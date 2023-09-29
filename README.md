@@ -24,7 +24,6 @@ WannaBnB was built using the following technologies:
 ### 🏠 [Homepage](https://wannabnb.onrender.com/)
 
 ## Table of Contents
-
 - [Installing/Getting Started](https://github.com/Syndux/Om-Nom/blob/main/README.md#installation)
   - [Initial Configuration](https://github.com/Syndux/Om-Nom/blob/main/README.md#initial-configuration)
 - [Screenshots](https://github.com/Syndux/Om-Nom/blob/main/README.md#screenshots)
