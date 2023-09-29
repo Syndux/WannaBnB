@@ -29,10 +29,10 @@ WannaBnB was built using the following technologies:
   - [Operating](https://github.com/Syndux/WannaBnB#operating)
 - [Project Showcase](https://github.com/Syndux/WannaBnB#project-showcase)
 - [Wiki Documents](https://github.com/Syndux/WannaBnB#wiki-documents)
-	- [API Routes](https://github.com/Syndux/WannaBnB/wiki/API-Routes)
- 	- [Database Schema](https://github.com/Syndux/WannaBnB/wiki/Database-Schema)
- 	- [Features](https://github.com/Syndux/WannaBnB/wiki/Feature-Documentation)
- 	- [Redux Store Tree](https://github.com/Syndux/WannaBnB/wiki/Redux-State-Pseudocode)
+	- API Routes
+ 	- Database Schema
+ 	- Features
+ 	- Redux Store Tree
 - [To-Dos/Future Features](https://github.com/Syndux/WannaBnB#to-dosfuture-features)
 - [Technical Implementation Details](https://github.com/Syndux/WannaBnB#technical-implementation-details)
 	- [Code Snippets](https://github.com/Syndux/WannaBnB#code-snippets)
