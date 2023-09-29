@@ -24,10 +24,11 @@ WannaBnB was built using the following technologies:
 ### 🏠 [Homepage](https://wannabnb.onrender.com/)
 
 ## Table of Contents
-- [Installing/Getting Started](https://github.com/Syndux/Om-Nom/blob/main/README.md#installation)
-  - [Initial Configuration](https://github.com/Syndux/Om-Nom/blob/main/README.md#initial-configuration)
-- [Screenshots](https://github.com/Syndux/Om-Nom/blob/main/README.md#screenshots)
-- [Wiki Documents](https://github.com/Syndux/Om-Nom/blob/main/README.md#wiki-documents)
+- [Installing/Getting Started](https://github.com/Syndux/WannaBnB/blob/main/README.md#installation)
+  - [Initial Configuration](https://github.com/Syndux/WannaBnB/blob/main/README.md#initial-configuration)
+  - [Operating](https://github.com/Syndux/WannaBnB/blob/main/README.md#operating)
+- [Project Showcase](https://github.com/Syndux/WannaBnB/blog/main/README.md#project-showcase)
+- [Wiki Documents](https://github.com/Syndux/WannaBnB/blob/main/README.md#wiki-documents)
 	- API Routes
  	- Database Schema
  	- Features
@@ -36,23 +37,97 @@ WannaBnB was built using the following technologies:
  	- Redux Store Tree
 	- User Stories
 	- Wireframes 
-- [To-Dos/Future Features](https://github.com/Syndux/Om-Nom/blob/main/README.md#to-dosfuture-features)
-- [Technical Implementation Details](https://github.com/Syndux/Om-Nom/blob/main/README.md#technical-implementation-details)
+- [To-Dos/Future Features](https://github.com/Syndux/WannaBnB/blob/main/README.md#to-dosfuture-features)
+- [Technical Implementation Details](https://github.com/Syndux/WannaBnB/blob/main/README.md#technical-implementation-details)
 	- Challenges
 	- Code Snippets
-- [Authors](https://github.com/Syndux/Om-Nom/blob/main/README.md#authors)
-- [Show your support](https://github.com/Syndux/Om-Nom/blob/main/README.md#show-your-support)
+- [Authors](https://github.com/Syndux/WannaBnB/blob/main/README.md#authors)
+- [Show your support](https://github.com/Syndux/WannaBnB/blob/main/README.md#show-your-support)
+
+## Installation
+
+### Initial Configuration
+#### Express/Sequelize
+To install and run this project locally, start off with your backend server.
+
+1. Clone this repository
+    ```bash
+    git clone https://github.com/Syndux/Om-Nom.git
+    ```
+
+2. Install dependencies
+    ```bash
+    cd backend
+    npm install
+    ```
+
+3. Create a **.env** file based on the example with proper settings for your
+   development environment
+    - Make sure the SQLite3 database connection URL is in the **.env** file
+    - The env example organizes all tables inside the `schema_name_here` schema, defined
+        by the `SCHEMA` environment variable.  Replace the value for
+        `SCHEMA` with a unique name, **making sure you use the snake_case
+        convention**.
+    <br></br>
+
+4. Migrate your database, seed your database, and run your Express app
+
+   ```bash
+    npx dotenv sequelize db:migrate
+    npx dotenv sequelize db:seed:all
+    npm start
+   ```
+5. Now that you have your backend Flask server running. You need to run the React App in development in a different terminal instance.
+
+#### React
+1. Make sure you have a new terminal instance separate from your terminal for your backend. Navigate into the Om Nom project folder and then into react-app folder.
+    ```bash
+    cd frontend
+    ```
+
+2. Install all your dependencies before starting up the application.
+    ```bash
+    npm install &&
+    npm start
+    ```
+
+3. Now that you have both your Express backend and React App frontend running, WannaBnB is operable.
+
+### Operating
+To run the application, navigate into the project folder in two separate terminal windows.
+
+1. Ensure that the database has already been migrated and seeded. If it hasn't been done yet, refer to [Intitial Configuration](https://github.com/Syndux/WannaBnB/blob/main/README.md#initial-configuration)
+
+2. In one terminal, go into backend and run the Express app
+    ```bash
+    npm start
+    ```
+
+3. In the other terminal, start the React app.
+    ```bash
+    npm start
+    ```
+
+4. WannaBnB will open in your browser and you can now enjoy using WannaBnB. Find your stay and get away!
 
 ## Project Showcase
 ![image](https://github.com/Syndux/WannaBnB/assets/78172054/49f5f54d-362f-46d4-9a5e-fd867a4fe090)
 
-## How to launch the full application locally
-1. Clone repo https://github.com/Syndux/WannaBnB
-2. cd into backend/
-3. Copy the .env.example file into .env
-4. ```npx dotenv sequelze db:migrate && npx dotenv sequelize db:seed:all```
-5. ```npm install && npm start```
-6. Open another terminal
-7. cd into frontend/
-8. ```npm install && npm start```
-9. completed!
+## [Wiki Documents](https://github.com/Syndux/WannaBnB/wiki)
+- [API Routes](https://github.com/nSyndux/WannaBnB/wiki/API-Routes)
+- [Database Schema](https://github.com/Syndux/WannaBnB/wiki/Database-Schema)
+- [Features](https://github.com/Syndux/WannaBnB/wiki/Feature-Documentation)
+- [Redux Store Tree](https://github.com/Syndux/WannaBnB/wiki/Redux-State-Pseudocode)
+
+## To-Dos/Future Features
+
+The project is fully functional in its current state, but some other features we would like to implement in the future include:
+
+- Ability to make a reservation/booking on a spot
+
+### Code Snippets
+
+## Author
+
+👤 **Huey Nguyen**
+* Huey's [Github](https://github.com/Syndux) and [LinkedIn](https://www.linkedin.com/in/huey-nguyen/)
