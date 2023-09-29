@@ -24,25 +24,19 @@ WannaBnB was built using the following technologies:
 ### 🏠 [Homepage](https://wannabnb.onrender.com/)
 
 ## Table of Contents
-- [Installing/Getting Started](https://github.com/Syndux/WannaBnB/blob/main/README.md#installation)
-  - [Initial Configuration](https://github.com/Syndux/WannaBnB/blob/main/README.md#initial-configuration)
-  - [Operating](https://github.com/Syndux/WannaBnB/blob/main/README.md#operating)
-- [Project Showcase](https://github.com/Syndux/WannaBnB/blog/main/README.md#project-showcase)
-- [Wiki Documents](https://github.com/Syndux/WannaBnB/blob/main/README.md#wiki-documents)
-	- API Routes
- 	- Database Schema
- 	- Features
- 	- Frontend Routes
- 	- React Components
- 	- Redux Store Tree
-	- User Stories
-	- Wireframes 
-- [To-Dos/Future Features](https://github.com/Syndux/WannaBnB/blob/main/README.md#to-dosfuture-features)
-- [Technical Implementation Details](https://github.com/Syndux/WannaBnB/blob/main/README.md#technical-implementation-details)
-	- Challenges
-	- Code Snippets
-- [Authors](https://github.com/Syndux/WannaBnB/blob/main/README.md#authors)
-- [Show your support](https://github.com/Syndux/WannaBnB/blob/main/README.md#show-your-support)
+- [Installing/Getting Started](https://github.com/Syndux/WannaBnB#installation)
+  - [Initial Configuration](https://github.com/Syndux/WannaBnB#initial-configuration)
+  - [Operating](https://github.com/Syndux/WannaBnB#operating)
+- [Project Showcase](https://github.com/Syndux/WannaBnB#project-showcase)
+- [Wiki Documents](https://github.com/Syndux/WannaBnB/wiki)
+	- [API Routes](https://github.com/Syndux/WannaBnB/wiki/API-Routes)
+ 	- [Database Schema](https://github.com/Syndux/WannaBnB/wiki/Database-Schema)
+ 	- [Features](https://github.com/Syndux/WannaBnB/wiki/Feature-Documentation)
+ 	- [Redux Store Tree](https://github.com/Syndux/WannaBnB/wiki/Redux-State-Pseudocode)
+- [To-Dos/Future Features](https://github.com/Syndux/WannaBnB#to-dosfuture-features)
+- [Technical Implementation Details](https://github.com/Syndux/WannaBnB#technical-implementation-details)
+	- [Code Snippets](https://github.com/Syndux/WannaBnB#code-snippets)
+- [Authors](https://github.com/Syndux/WannaBnB#author)
 
 ## Installation
 
@@ -125,6 +119,7 @@ The project is fully functional in its current state, but some other features we
 
 - Ability to make a reservation/booking on a spot
 
+## Technical Implementation Details
 ### Code Snippets
 
 ## Author
