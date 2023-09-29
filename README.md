@@ -36,7 +36,7 @@ WannaBnB was built using the following technologies:
 - [To-Dos/Future Features](https://github.com/Syndux/WannaBnB#to-dosfuture-features)
 - [Technical Implementation Details](https://github.com/Syndux/WannaBnB#technical-implementation-details)
 	- [Code Snippets](https://github.com/Syndux/WannaBnB#code-snippets)
-- [Authors](https://github.com/Syndux/WannaBnB#author)
+- [Author](https://github.com/Syndux/WannaBnB#author)
 
 ## Installation
 
