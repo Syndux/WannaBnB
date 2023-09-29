@@ -28,7 +28,7 @@ WannaBnB was built using the following technologies:
   - [Initial Configuration](https://github.com/Syndux/WannaBnB#initial-configuration)
   - [Operating](https://github.com/Syndux/WannaBnB#operating)
 - [Project Showcase](https://github.com/Syndux/WannaBnB#project-showcase)
-- [Wiki Documents](https://github.com/Syndux/WannaBnB/wiki)
+- [Wiki Documents](https://github.com/Syndux/WannaBnB#wiki-documents)
 	- [API Routes](https://github.com/Syndux/WannaBnB/wiki/API-Routes)
  	- [Database Schema](https://github.com/Syndux/WannaBnB/wiki/Database-Schema)
  	- [Features](https://github.com/Syndux/WannaBnB/wiki/Feature-Documentation)
@@ -108,7 +108,7 @@ To run the application, navigate into the project folder in two separate termina
 ![image](https://github.com/Syndux/WannaBnB/assets/78172054/49f5f54d-362f-46d4-9a5e-fd867a4fe090)
 
 ## [Wiki Documents](https://github.com/Syndux/WannaBnB/wiki)
-- [API Routes](https://github.com/nSyndux/WannaBnB/wiki/API-Routes)
+- [API Routes](https://github.com/Syndux/WannaBnB/wiki/API-Routes)
 - [Database Schema](https://github.com/Syndux/WannaBnB/wiki/Database-Schema)
 - [Features](https://github.com/Syndux/WannaBnB/wiki/Feature-Documentation)
 - [Redux Store Tree](https://github.com/Syndux/WannaBnB/wiki/Redux-State-Pseudocode)
@@ -122,7 +122,27 @@ The project is fully functional in its current state, but some other features we
 ## Technical Implementation Details
 ### Code Snippets
 
+**Spot Details**
+```javascript
+<div className="spot-details">
+          <div className="spot-location-rating">
+            <div className="spot-city-state">{`${spot.city}, ${spot.state}`}</div>
+            <span>
+              <i className="fa-solid fa-star spot-rating" />
+              {spot.avgRating
+                ? spot.avgRating.toFixed(Number.isInteger(spot.avgRating) ? 1 : 2)
+                : "New"}
+            </span>
+          </div>
+          <div className="spot-price">
+            <span className="spot-price-value">${spot.price} </span>
+            <span>night</span>
+          </div>
+        </div>
+```
+
 ## Author
 
 👤 **Huey Nguyen**
-* Huey's [Github](https://github.com/Syndux) and [LinkedIn](https://www.linkedin.com/in/huey-nguyen/)
+* [Github](https://github.com/Syndux)
+* [LinkedIn](https://www.linkedin.com/in/huey-nguyen/)
