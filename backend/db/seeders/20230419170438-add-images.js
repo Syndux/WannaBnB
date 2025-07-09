@@ -73,7 +73,7 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://jewkesdesign.com/wp-content/uploads/2023/04/Jewkes-Design_Black-Modern-House_04.jpg",
+          url: "https://media.architecturaldigest.com/photos/571e97c5741fcddb16b559c9/master/w_1280%2Cc_limit/modernist-decor-inspiration-01.jpg",
           preview: true,
           imageableId: 4,
           imageableType: "Spot",
