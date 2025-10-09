@@ -49,7 +49,7 @@ module.exports = {
           imageableType: "Spot",
         },
         {
-          url: "https://cdn.sanity.io/images/32lej2m6/production/6e51ae5090f4dd46e25438a9f29f991a5763f806-1024x760.jpg?auto=format",
+          url: "https://images.squarespace-cdn.com/content/v1/5c3c4ca8365f02e708cc7c8c/42e6001e-dd49-403b-b0cd-9dd390307262/Fairmont%2C+4+Bedder+Condominium+Kitchen+9.jpg?format=500w",
           preview: true,
           imageableId: 2,
           imageableType: "Spot",
